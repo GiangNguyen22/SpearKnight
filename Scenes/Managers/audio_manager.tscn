@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bssjjygu83iwl"]
+
+[ext_resource type="Script" uid="uid://da11xjja1ocm7" path="res://Scenes/Managers/audio_manager.gd" id="1_hp1cr"]
+[ext_resource type="AudioStream" uid="uid://cyjn00m1ehkp1" path="res://Assets/Sound/FX/jump.wav" id="2_esrla"]
+[ext_resource type="AudioStream" uid="uid://d2yw2hs5pd8cm" path="res://Assets/Sound/FX/coin_pickup.wav" id="3_qes3j"]
+[ext_resource type="AudioStream" uid="uid://b5gyns7mtiq0d" path="res://Assets/Sound/FX/hurt.wav" id="4_84782"]
+[ext_resource type="AudioStream" uid="uid://cbquowt7cd3d6" path="res://Assets/Sound/FX/level_complete.wav" id="5_84782"]
+
+[node name="AudioManager" type="Node" unique_id=1179160635]
+script = ExtResource("1_hp1cr")
+
+[node name="JumpSfx" type="AudioStreamPlayer" parent="." unique_id=2131118805]
+stream = ExtResource("2_esrla")
+volume_db = -3.0
+bus = &"sfx"
+
+[node name="CoinPickup" type="AudioStreamPlayer" parent="." unique_id=1602662747]
+stream = ExtResource("3_qes3j")
+bus = &"sfx"
+
+[node name="DeathSfx" type="AudioStreamPlayer" parent="." unique_id=1498187337]
+stream = ExtResource("4_84782")
+volume_db = -3.0
+bus = &"sfx"
+
+[node name="RespawnSfx" type="AudioStreamPlayer" parent="." unique_id=179996886]
+bus = &"sfx"
+
+[node name="LevelCompleteSfx" type="AudioStreamPlayer" parent="." unique_id=1672470775]
+stream = ExtResource("5_84782")
+volume_db = -4.0
+bus = &"sfx"

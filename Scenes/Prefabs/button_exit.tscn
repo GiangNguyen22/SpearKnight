@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://puc4l62gx6et"]
+
+[ext_resource type="Shortcut" uid="uid://bkpwoj8fplbxr" path="res://Scenes/Prefabs/esc_shortcut.tres" id="1_t4y7r"]
+[ext_resource type="Script" uid="uid://b0ufvbwfu0xsb" path="res://Scenes/Prefabs/button_exit.gd" id="2_cooxc"]
+
+[node name="btnExit" type="Button" unique_id=1633606001]
+offset_left = 42.0
+offset_top = 34.0
+offset_right = 168.0
+offset_bottom = 88.0
+shortcut = ExtResource("1_t4y7r")
+text = "Back"
+script = ExtResource("2_cooxc")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

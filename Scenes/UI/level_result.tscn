@@ -1,0 +1,304 @@
+[gd_scene format=3 uid="uid://b5x7q9yv8k3m1"]
+
+[ext_resource type="Script" path="res://Scenes/UI/level_result.gd" id="1_script"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="2_theme"]
+[ext_resource type="FontFile" uid="uid://b3ivysmhcn84h" path="res://Assets/Fonts/Kodchasan-Bold.ttf" id="3_font"]
+[ext_resource type="Texture2D" path="res://Assets/UI/star_gray.png" id="4_stargray"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/FX/star_ding.wav" id="5_ding"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/FX/level_complete.wav" id="6_complete"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.06, 0.08, 0.12, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.72, 0.28, 0.9)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.7)
+shadow_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0.035, 0.045, 0.065, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.28, 0.38, 0.5)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="LevelResult" type="CanvasLayer"]
+process_mode = 3
+layer = 100
+script = ExtResource("1_script")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.03, 0.05, 0.82)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(530, 440)
+layout_mode = 2
+pivot_offset = Vector2(265, 220)
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Margin" type="MarginContainer" parent="CenterContainer/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 22
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HeaderBox" type="VBoxContainer" parent="CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/Panel/Margin/VBox/HeaderBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.86, 0.32, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 26
+text = "HOÀN THÀNH MÀN CHƠI"
+horizontal_alignment = 1
+
+[node name="LevelNameLabel" type="Label" parent="CenterContainer/Panel/Margin/VBox/HeaderBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.8, 0.9, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 13
+text = "HẦM NGỤC - TẦNG 1"
+horizontal_alignment = 1
+
+[node name="HSeparator1" type="HSeparator" parent="CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+
+[node name="StarsBox" type="HBoxContainer" parent="CenterContainer/Panel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="StarCol1" type="VBoxContainer" parent="CenterContainer/Panel/Margin/VBox/StarsBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="Star1" type="TextureRect" parent="CenterContainer/Panel/Margin/VBox/StarsBox/StarCol1"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("4_stargray")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label1" type="Label" parent="CenterContainer/Panel/Margin/VBox/StarsBox/StarCol1"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 11
+text = "VƯỢT ẢI"
+horizontal_alignment = 1
+
+[node name="StarCol2" type="VBoxContainer" parent="CenterContainer/Panel/Margin/VBox/StarsBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="Star2" type="TextureRect" parent="CenterContainer/Panel/Margin/VBox/StarsBox/StarCol2"]
+custom_minimum_size = Vector2(68, 68)
+layout_mode = 2
+texture = ExtResource("4_stargray")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="CenterContainer/Panel/Margin/VBox/StarsBox/StarCol2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 11
+text = "KHO BÁU"
+horizontal_alignment = 1
+
+[node name="StarCol3" type="VBoxContainer" parent="CenterContainer/Panel/Margin/VBox/StarsBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="Star3" type="TextureRect" parent="CenterContainer/Panel/Margin/VBox/StarsBox/StarCol3"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("4_stargray")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label3" type="Label" parent="CenterContainer/Panel/Margin/VBox/StarsBox/StarCol3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 11
+text = "THẦN TỐC"
+horizontal_alignment = 1
+
+[node name="StatsGrid" type="HBoxContainer" parent="CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="CardTime" type="PanelContainer" parent="CenterContainer/Panel/Margin/VBox/StatsGrid"]
+custom_minimum_size = Vector2(148, 68)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/Panel/Margin/VBox/StatsGrid/CardTime"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Header" type="Label" parent="CenterContainer/Panel/Margin/VBox/StatsGrid/CardTime/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.72, 0.8, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 10
+text = "THỜI GIAN"
+horizontal_alignment = 1
+
+[node name="Value" type="Label" parent="CenterContainer/Panel/Margin/VBox/StatsGrid/CardTime/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 1, 0.8, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 18
+text = "00:00"
+horizontal_alignment = 1
+
+[node name="Sub" type="Label" parent="CenterContainer/Panel/Margin/VBox/StatsGrid/CardTime/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 9
+text = "Mục tiêu: < 60s"
+horizontal_alignment = 1
+
+[node name="CardCoins" type="PanelContainer" parent="CenterContainer/Panel/Margin/VBox/StatsGrid"]
+custom_minimum_size = Vector2(148, 68)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/Panel/Margin/VBox/StatsGrid/CardCoins"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Header" type="Label" parent="CenterContainer/Panel/Margin/VBox/StatsGrid/CardCoins/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.72, 0.8, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 10
+text = "TIỀN VÀNG"
+horizontal_alignment = 1
+
+[node name="Value" type="Label" parent="CenterContainer/Panel/Margin/VBox/StatsGrid/CardCoins/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 18
+text = "0 / 0"
+horizontal_alignment = 1
+
+[node name="Sub" type="Label" parent="CenterContainer/Panel/Margin/VBox/StatsGrid/CardCoins/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 9
+text = "Mục tiêu: ≥ 80%"
+horizontal_alignment = 1
+
+[node name="CardHP" type="PanelContainer" parent="CenterContainer/Panel/Margin/VBox/StatsGrid"]
+custom_minimum_size = Vector2(148, 68)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/Panel/Margin/VBox/StatsGrid/CardHP"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Header" type="Label" parent="CenterContainer/Panel/Margin/VBox/StatsGrid/CardHP/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.72, 0.8, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 10
+text = "SINH LỰC"
+horizontal_alignment = 1
+
+[node name="Value" type="Label" parent="CenterContainer/Panel/Margin/VBox/StatsGrid/CardHP/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.45, 0.45, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 18
+text = "100 HP"
+horizontal_alignment = 1
+
+[node name="Sub" type="Label" parent="CenterContainer/Panel/Margin/VBox/StatsGrid/CardHP/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 9
+text = "Không mất mạng"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+
+[node name="ButtonsBox" type="HBoxContainer" parent="CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="MenuButton" type="Button" parent="CenterContainer/Panel/Margin/VBox/ButtonsBox"]
+custom_minimum_size = Vector2(110, 42)
+layout_mode = 2
+theme = ExtResource("2_theme")
+text = "MENU"
+
+[node name="ReplayButton" type="Button" parent="CenterContainer/Panel/Margin/VBox/ButtonsBox"]
+custom_minimum_size = Vector2(120, 42)
+layout_mode = 2
+theme = ExtResource("2_theme")
+text = "CHƠI LẠI"
+
+[node name="NextButton" type="Button" parent="CenterContainer/Panel/Margin/VBox/ButtonsBox"]
+custom_minimum_size = Vector2(140, 42)
+layout_mode = 2
+theme = ExtResource("2_theme")
+theme_override_colors/font_color = Color(1, 0.95, 0.65, 1)
+text = "CHƠI TIẾP"
+
+[node name="DingSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ding")
+volume_db = 2.0
+bus = &"sfx"
+
+[node name="CompleteSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_complete")
+volume_db = 1.0
+bus = &"sfx"

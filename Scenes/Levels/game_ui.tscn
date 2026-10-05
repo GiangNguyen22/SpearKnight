@@ -1,0 +1,618 @@
+[gd_scene format=3 uid="uid://cdwabmqtlxr1y"]
+
+[ext_resource type="Script" path="res://Scenes/Levels/game_ui.gd" id="1_6pfiu"]
+[ext_resource type="FontFile" uid="uid://qgc4vi5osk7v" path="res://Assets/Fonts/Star Choco.ttf" id="2_font_choco"]
+[ext_resource type="FontFile" uid="uid://b3ivysmhcn84h" path="res://Assets/Fonts/Kodchasan-Bold.ttf" id="3_font_kod"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="4_theme"]
+[ext_resource type="Texture2D" uid="uid://cs52s37v04q41" path="res://Assets/Icons/icons8-heart-48.png" id="5_heart"]
+[ext_resource type="Texture2D" uid="uid://cxupb4k8n8h1e" path="res://Assets/UI/icon_sound_on.png" id="6_sound_on"]
+[ext_resource type="Texture2D" uid="uid://dqu0g3o0e4g3c" path="res://Assets/UI/icon_music_on.png" id="7_music_on"]
+[ext_resource type="Texture2D" uid="uid://b8m3y6s2p5w4k" path="res://Assets/UI/icon_pause.png" id="8_pause"]
+[ext_resource type="Texture2D" uid="uid://b7v4k2m9x5c1p" path="res://Assets/UI/icon_arrow_left.png" id="9_left"]
+[ext_resource type="Texture2D" uid="uid://c2m9x4b7v1k3s" path="res://Assets/UI/icon_arrow_up.png" id="10_up"]
+[ext_resource type="Texture2D" uid="uid://d8k2m4x9v7b3p" path="res://Assets/UI/icon_arrow_right.png" id="11_right"]
+[ext_resource type="Texture2D" uid="uid://c9m2x4v7b1k8s" path="res://Assets/UI/icon_spear.png" id="12_spear"]
+[ext_resource type="Texture2D" uid="uid://b1v9x4m7k2s3p" path="res://Assets/UI/icon_dash.png" id="13_dash"]
+[ext_resource type="Texture2D" uid="uid://c7m9v1x4b8k2s" path="res://Assets/UI/icon_element.png" id="14_element"]
+[ext_resource type="Texture2D" uid="uid://d1x4m7v9b2k8s" path="res://Assets/UI/icon_shop.png" id="15_shop_ico"]
+[ext_resource type="PackedScene" uid="uid://d3x8y7w1q9k4n" path="res://Scenes/UI/shop_menu.tscn" id="16_shop"]
+[ext_resource type="PackedScene" uid="uid://b8y9w4m1q2r3s" path="res://Scenes/UI/pause_menu.tscn" id="17_pause"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_circle"]
+bg_color = Color(0.047058824, 0.08627451, 0.13725491, 0.82)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.8, 0.9, 0.75)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_circle_hover"]
+bg_color = Color(0.09411765, 0.23529412, 0.34509805, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.45, 0.98, 1, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_circle_pressed"]
+bg_color = Color(0.2, 0.85, 1, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boss_fill"]
+bg_color = Color(0.88235295, 0.2, 0.15686275, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(1, 0.5, 0.4, 0.8)
+corner_radius_top_left = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.039215688, 0.06666667, 0.101960786, 0.88)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8509804, 0.7019608, 0.2509804, 0.65)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_bg"]
+bg_color = Color(0.058823529, 0.08627451, 0.1254902, 0.95)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25, 0.35, 0.45, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="UserInterface" type="CanvasLayer"]
+script = ExtResource("1_6pfiu")
+
+[node name="GameUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopBar" type="Control" parent="GameUI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 84.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="LifeRect" type="TextureRect" parent="GameUI/TopBar"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 10.0
+offset_right = 256.0
+offset_bottom = 58.0
+texture = ExtResource("5_heart")
+stretch_mode = 1
+
+[node name="ScoreLabel" type="Label" parent="GameUI/TopBar"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 63.0
+offset_right = 186.0
+offset_bottom = 105.0
+theme_override_colors/font_color = Color(0.910156, 0.730469, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_font_choco")
+theme_override_font_sizes/font_size = 32
+text = "Score: 0"
+
+[node name="KeyLabel" type="Label" parent="GameUI/TopBar"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 16.0
+offset_top = 108.0
+offset_right = 186.0
+offset_bottom = 150.0
+theme_override_colors/font_color = Color(1, 0.85, 0.25, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_font_choco")
+theme_override_font_sizes/font_size = 26
+text = "Keys: 0/3"
+
+[node name="HPLabel" type="Label" parent="GameUI/TopBar"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 166.0
+offset_top = 63.0
+offset_right = 211.0
+offset_bottom = 105.0
+theme_override_colors/font_color = Color(0, 0.7294118, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_font_choco")
+theme_override_font_sizes/font_size = 32
+text = "HP"
+
+[node name="HpRect" type="ColorRect" parent="GameUI/TopBar"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 63.0
+offset_right = 364.0
+offset_bottom = 95.0
+
+[node name="ProgressBar" type="ProgressBar" parent="GameUI/TopBar/HpRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 138.0
+offset_bottom = 30.0
+theme = ExtResource("4_theme")
+value = 100.0
+
+[node name="TopRightWidget" type="HBoxContainer" parent="GameUI/TopBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -162.0
+offset_top = 10.0
+offset_right = -16.0
+offset_bottom = 54.0
+grow_horizontal = 0
+theme_override_constants/separation = 8
+
+[node name="BtnMusic" type="Button" parent="GameUI/TopBar/TopRightWidget"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_circle")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_circle_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_circle_pressed")
+
+[node name="MusicIcon" type="TextureRect" parent="GameUI/TopBar/TopRightWidget/BtnMusic"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -13.0
+offset_top = -13.0
+offset_right = 13.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_music_on")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnSound" type="Button" parent="GameUI/TopBar/TopRightWidget"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_circle")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_circle_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_circle_pressed")
+
+[node name="SoundIcon" type="TextureRect" parent="GameUI/TopBar/TopRightWidget/BtnSound"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -13.0
+offset_top = -13.0
+offset_right = 13.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_sound_on")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnPause" type="Button" parent="GameUI/TopBar/TopRightWidget"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_circle")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_circle_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_circle_pressed")
+
+[node name="PauseIcon" type="TextureRect" parent="GameUI/TopBar/TopRightWidget/BtnPause"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_pause")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BossBarPanel" type="PanelContainer" parent="GameUI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -220.0
+offset_top = 10.0
+offset_right = 220.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="VBox" type="VBoxContainer" parent="GameUI/BossBarPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="BossNameLabel" type="Label" parent="GameUI/BossBarPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.35, 0.25, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_font_kod")
+theme_override_font_sizes/font_size = 13
+text = "CHÚA TỂ HẦM NGỤC - DUNGEON BOSS"
+horizontal_alignment = 1
+
+[node name="BossProgressBar" type="ProgressBar" parent="GameUI/BossBarPanel/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_hp_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_boss_fill")
+value = 100.0
+show_percentage = false
+
+[node name="BottomControls" type="Control" parent="GameUI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -110.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="btnLeft" type="Button" parent="GameUI/BottomControls"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -80.0
+offset_right = 80.0
+offset_bottom = -24.0
+grow_vertical = 0
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_circle")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_circle_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_circle_pressed")
+
+[node name="Icon" type="TextureRect" parent="GameUI/BottomControls/btnLeft"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("9_left")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="btnUp" type="Button" parent="GameUI/BottomControls"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 92.0
+offset_top = -94.0
+offset_right = 148.0
+offset_bottom = -38.0
+grow_vertical = 0
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_circle")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_circle_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_circle_pressed")
+
+[node name="Icon" type="TextureRect" parent="GameUI/BottomControls/btnUp"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_up")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="btnRight" type="Button" parent="GameUI/BottomControls"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 160.0
+offset_top = -80.0
+offset_right = 216.0
+offset_bottom = -24.0
+grow_vertical = 0
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_circle")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_circle_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_circle_pressed")
+
+[node name="Icon" type="TextureRect" parent="GameUI/BottomControls/btnRight"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("11_right")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="btnShop" type="Button" parent="GameUI/BottomControls"]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -282.0
+offset_top = -78.0
+offset_right = -230.0
+offset_bottom = -26.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_circle")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_circle_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_circle_pressed")
+
+[node name="Icon" type="TextureRect" parent="GameUI/BottomControls/btnShop"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -14.0
+offset_right = 14.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_shop_ico")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="btnElement" type="Button" parent="GameUI/BottomControls"]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -218.0
+offset_top = -78.0
+offset_right = -166.0
+offset_bottom = -26.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_circle")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_circle_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_circle_pressed")
+
+[node name="Icon" type="TextureRect" parent="GameUI/BottomControls/btnElement"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -14.0
+offset_right = 14.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("14_element")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="btnDash" type="Button" parent="GameUI/BottomControls"]
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -154.0
+offset_top = -80.0
+offset_right = -100.0
+offset_bottom = -26.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_circle")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_circle_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_circle_pressed")
+
+[node name="Icon" type="TextureRect" parent="GameUI/BottomControls/btnDash"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_dash")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="btnShoot" type="Button" parent="GameUI/BottomControls"]
+custom_minimum_size = Vector2(66, 66)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -86.0
+offset_top = -86.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_circle")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_circle_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_circle_pressed")
+
+[node name="Icon" type="TextureRect" parent="GameUI/BottomControls/btnShoot"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -19.0
+offset_right = 19.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("12_spear")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AlertLabel" type="Label" parent="GameUI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -24.0
+offset_right = 160.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.8, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_font_kod")
+theme_override_font_sizes/font_size = 18
+text = "Alert Message"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShopMenu" parent="." instance=ExtResource("16_shop")]
+visible = false
+
+[node name="PauseMenu" parent="." instance=ExtResource("17_pause")]
+visible = false
+
+[connection signal="button_down" from="GameUI/BottomControls/btnLeft" to="." method="_on_btn_left_pressed"]
+[connection signal="button_up" from="GameUI/BottomControls/btnLeft" to="." method="_on_btn_left_released"]
+[connection signal="button_down" from="GameUI/BottomControls/btnUp" to="." method="_on_btn_up_pressed"]
+[connection signal="button_up" from="GameUI/BottomControls/btnUp" to="." method="_on_btn_up_released"]
+[connection signal="button_down" from="GameUI/BottomControls/btnRight" to="." method="_on_btn_right_pressed"]
+[connection signal="button_up" from="GameUI/BottomControls/btnRight" to="." method="_on_btn_right_released"]
+[connection signal="pressed" from="GameUI/BottomControls/btnShop" to="." method="_on_btn_shop_pressed"]
+[connection signal="pressed" from="GameUI/BottomControls/btnElement" to="." method="_on_btn_element_pressed"]
+[connection signal="button_down" from="GameUI/BottomControls/btnDash" to="." method="_on_btn_dash_button_down"]
+[connection signal="button_up" from="GameUI/BottomControls/btnDash" to="." method="_on_btn_dash_button_up"]
+[connection signal="button_down" from="GameUI/BottomControls/btnShoot" to="." method="_on_btn_shoot_button_down"]
+[connection signal="button_up" from="GameUI/BottomControls/btnShoot" to="." method="_on_btn_shoot_button_up"]

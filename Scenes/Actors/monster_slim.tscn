@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://ek7hxkqp2wff"]
+
+[ext_resource type="PackedScene" uid="uid://d27bcsmx82vfa" path="res://Scenes/Actors/enemy.tscn" id="1_b7voo"]
+[ext_resource type="Script" uid="uid://bx5lotsye1r4s" path="res://Scenes/Actors/monster_small.gd" id="2_a8voy"]
+[ext_resource type="Texture2D" uid="uid://dmbvx0mth6jk0" path="res://Assets/Spritesheet/2_TROLL/Troll_02_1_WALK_000.png" id="3_8glpq"]
+[ext_resource type="Texture2D" uid="uid://bd8gfdk4je7er" path="res://Assets/Spritesheet/2_TROLL/Troll_02_1_WALK_001.png" id="4_caomq"]
+[ext_resource type="Texture2D" uid="uid://cnt0lg3r7fmeg" path="res://Assets/Spritesheet/2_TROLL/Troll_02_1_WALK_002.png" id="5_i4d51"]
+[ext_resource type="Texture2D" uid="uid://7rq5iqyrt3ba" path="res://Assets/Spritesheet/2_TROLL/Troll_02_1_WALK_003.png" id="6_4kvek"]
+[ext_resource type="Texture2D" uid="uid://fbxcbo30wuha" path="res://Assets/Spritesheet/2_TROLL/Troll_02_1_WALK_004.png" id="7_l7t21"]
+[ext_resource type="Texture2D" uid="uid://br3c8npdxqf6a" path="res://Assets/Spritesheet/2_TROLL/Troll_02_1_WALK_005.png" id="8_fx8d6"]
+[ext_resource type="Texture2D" uid="uid://d0ikhxwu3q2y0" path="res://Assets/Spritesheet/2_TROLL/Troll_02_1_WALK_006.png" id="9_06ehe"]
+[ext_resource type="Texture2D" uid="uid://bfxtf2uj0wem7" path="res://Assets/Spritesheet/2_TROLL/Troll_02_1_WALK_007.png" id="10_d55ix"]
+[ext_resource type="Texture2D" uid="uid://d03kfv45p0e14" path="res://Assets/Spritesheet/2_TROLL/Troll_02_1_WALK_008.png" id="11_jatlv"]
+[ext_resource type="Texture2D" uid="uid://0q7rnx471rsy" path="res://Assets/Spritesheet/2_TROLL/Troll_02_1_WALK_009.png" id="12_bqauc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l7ctk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_8glpq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_caomq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_i4d51")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4kvek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_l7t21")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_fx8d6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_06ehe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_d55ix")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_jatlv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_bqauc")
+}],
+"loop": 1,
+"name": &"troll",
+"speed": 5.0
+}]
+
+[node name="Enemy" unique_id=600502477 instance=ExtResource("1_b7voo")]
+script = ExtResource("2_a8voy")
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=587424215]
+position = Vector2(0, -17)
+scale = Vector2(1.25, 1)
+
+[node name="CollisionShape2D2" parent="HitArea" parent_id_path=PackedInt32Array(1115411835) index="0" unique_id=2008793250]
+position = Vector2(0, -17)
+scale = Vector2(1.25, 1)
+
+[node name="Sprite" parent="." index="3" unique_id=1445111960]
+position = Vector2(0, -1)
+
+[node name="AnimateSprite" type="AnimatedSprite2D" parent="Sprite" index="0" unique_id=87960724]
+position = Vector2(-1, -55)
+scale = Vector2(-0.16215643, 0.17746346)
+sprite_frames = SubResource("SpriteFrames_l7ctk")
+animation = &"troll"
+
+[node name="Ray" parent="Sprite" index="1" unique_id=1415425330]
+visible = false

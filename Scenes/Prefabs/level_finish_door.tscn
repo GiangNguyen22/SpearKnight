@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://cyti38f0lagf2"]
+
+[ext_resource type="Script" path="res://Scenes/Prefabs/level_finish_door.gd" id="1_bto8y"]
+[ext_resource type="Texture2D" uid="uid://clnok6h0axegl" path="res://Assets/platformPack_tile048.png" id="2_v64bf"]
+[ext_resource type="FontFile" uid="uid://b3ivysmhcn84h" path="res://Assets/Fonts/Kodchasan-Bold.ttf" id="3_font"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_34g1n"]
+size = Vector2(66, 80)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_badge"]
+bg_color = Color(0.06, 0.08, 0.12, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.85, 0.7, 0.25, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="LevelFinishDoor" type="Area2D" unique_id=1136132539]
+collision_mask = 2
+script = ExtResource("1_bto8y")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1854125426]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_v64bf")
+region_rect = Rect2(320, 320, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1149726814]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_34g1n")
+
+[node name="LockBadge" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -70.0
+offset_top = -65.0
+offset_right = 70.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.8, 0.2, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_badge")
+text = "🔒 Cần Chìa: 0/3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

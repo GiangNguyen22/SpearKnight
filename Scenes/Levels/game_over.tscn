@@ -1,0 +1,145 @@
+[gd_scene load_steps=8 format=3 uid="uid://c15tw24t3axhb"]
+
+[ext_resource type="Script" path="res://Scenes/Prefabs/screen_bg.gd" id="1_bg"]
+[ext_resource type="PackedScene" uid="uid://puc4l62gx6et" path="res://Scenes/Prefabs/button_exit.tscn" id="2_buq0o"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="2_chlux"]
+[ext_resource type="Texture2D" path="res://Assets/BG/scifi_distant_sky.jpg" id="3_sky_far"]
+[ext_resource type="Texture2D" path="res://Assets/BG/scifi_base_front.jpg" id="4_sky_near"]
+[ext_resource type="Texture2D" path="res://Assets/BG/mountains.png" id="5_hills_far"]
+[ext_resource type="Texture2D" path="res://Assets/BG/cloudLayerB1.png" id="6_hills_near"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.019607844, 0.050980393, 0.07450981, 0.6)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.3529412, 0.31764707, 0.45)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="GameOver" type="Node2D" unique_id=826370530]
+script = ExtResource("1_bg")
+
+[node name="Background" type="Node2D" parent="." unique_id=826370531]
+
+[node name="SkyFar" type="Sprite2D" parent="Background" unique_id=826370532]
+z_index = -40
+texture_filter = 1
+modulate = Color(1, 1, 1, 0.9)
+scale = Vector2(0.92, 0.92)
+texture = ExtResource("3_sky_far")
+
+[node name="SkyNear" type="Sprite2D" parent="Background" unique_id=826370533]
+z_index = -32
+texture_filter = 1
+modulate = Color(1, 1, 1, 0.92)
+scale = Vector2(0.98, 0.98)
+texture = ExtResource("4_sky_near")
+
+[node name="HillsFar" type="Sprite2D" parent="Background" unique_id=826370534]
+z_index = -28
+texture_filter = 1
+modulate = Color(0.15, 0.2, 0.26, 0.85)
+texture = ExtResource("5_hills_far")
+
+[node name="HillsNear" type="Sprite2D" parent="Background" unique_id=826370535]
+z_index = -20
+texture_filter = 1
+modulate = Color(0.07, 0.1, 0.14, 0.9)
+texture = ExtResource("6_hills_near")
+
+[node name="UI" type="Control" parent="." unique_id=826370536]
+layout_mode = 3
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_chlux")
+
+[node name="Scrim" type="ColorRect" parent="UI" unique_id=826370537]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.15686275, 0.019607844, 0.03137255, 0.38)
+
+[node name="Panel" type="Panel" parent="UI" unique_id=826370538]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.0
+offset_top = -140.0
+offset_right = 290.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Title" type="Label" parent="UI/Panel" unique_id=1965507633]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -106.0
+offset_right = 220.0
+offset_bottom = -46.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.3529412, 0.31764707, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 42
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="btnExit" parent="UI/Panel" index="0" instance=ExtResource("2_buq0o")]
+unique_id = 1633606001
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -262.0
+offset_top = 14.0
+offset_right = -12.0
+offset_bottom = 86.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_top = NodePath("")
+focus_neighbor_bottom = NodePath("btnPlay")
+text = "Exit to Menu"
+
+[node name="btnPlay" parent="UI/Panel" index="1" instance=ExtResource("2_buq0o")]
+unique_id = 1146872882
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = 14.0
+offset_right = 262.0
+offset_bottom = 86.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_top = NodePath("")
+focus_neighbor_bottom = NodePath("btnExit")
+shortcut = null
+text = "Play Again"

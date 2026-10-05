@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://6me6i2b7wcjc"]
+
+[ext_resource type="Script" path="res://Scenes/Actors/npc_village_head.gd" id="1_npc"]
+[ext_resource type="Texture2D" path="res://Assets/Spritesheet/village_elder.png" id="2_elder"]
+[ext_resource type="FontFile" uid="uid://b3ivysmhcn84h" path="res://Assets/Fonts/Kodchasan-Bold.ttf" id="3_font"]
+[ext_resource type="Texture2D" path="res://Assets/UI/portrait_elder.jpg" id="4_port"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
+radius = 16.0
+height = 84.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_interact"]
+radius = 85.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prompt"]
+bg_color = Color(0.08, 0.12, 0.18, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9, 0.75, 0.25, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 4
+
+[node name="NPCVillageHead" type="CharacterBody2D" groups=["NPC"]]
+collision_layer = 8
+collision_mask = 1
+script = ExtResource("1_npc")
+npc_portrait = ExtResource("4_port")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -42)
+shape = SubResource("CapsuleShape2D_body")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -50)
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("2_elder")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+position = Vector2(0, -42)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_interact")
+
+[node name="QuestMarker" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -115.0
+offset_right = 20.0
+offset_bottom = -88.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 20
+text = "[!]"
+horizontal_alignment = 1
+
+[node name="PromptUI" type="Node2D" parent="."]
+position = Vector2(0, -85)
+
+[node name="PromptButton" type="Button" parent="PromptUI"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -65.0
+offset_top = -24.0
+offset_right = 65.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_prompt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_prompt")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_prompt")
+text = "[E] Trò chuyện"

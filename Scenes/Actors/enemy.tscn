@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://d27bcsmx82vfa"]
+
+[ext_resource type="Script" uid="uid://cqthh7s5qpuw3" path="res://Scenes/Actors/enemy.gd" id="1_7cwx2"]
+[ext_resource type="AudioStream" uid="uid://wg4mya74ni6n" path="res://Assets/Sound/FX/explosion.wav" id="2_5n1qu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_21vrd"]
+radius = 17.0
+height = 44.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tyn28"]
+radius = 19.0
+height = 46.0
+
+[sub_resource type="Curve" id="Curve_yvw6o"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.246032, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_wxnld"]
+offsets = PackedFloat32Array(0.25, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[node name="Enemy" type="CharacterBody2D" unique_id=600502477 groups=["Enemy"]]
+collision_layer = 4
+collision_mask = 13
+script = ExtResource("1_7cwx2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=587424215]
+position = Vector2(0, -22)
+shape = SubResource("CapsuleShape2D_21vrd")
+
+[node name="HitArea" type="Area2D" parent="." unique_id=1115411835]
+collision_layer = 4
+collision_mask = 11
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitArea" unique_id=2008793250]
+position = Vector2(0, -22)
+shape = SubResource("CapsuleShape2D_tyn28")
+
+[node name="DeathParticles" type="CPUParticles2D" parent="." unique_id=1072158612]
+z_index = 2
+position = Vector2(2.08165e-12, -33)
+scale = Vector2(1.5, 1.5)
+emitting = false
+amount = 20
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.5
+emission_shape = 2
+emission_sphere_radius = 21.05
+direction = Vector2(0, -1)
+spread = 21.48
+gravity = Vector2(0, 400)
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+angular_velocity_min = 100.0
+angular_velocity_max = 100.0
+damping_min = 1.0
+damping_max = 1.0
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_min = 2.0
+scale_amount_max = 30.0
+scale_amount_curve = SubResource("Curve_yvw6o")
+color = Color(0.671534, 0.004919853, 0, 1)
+color_ramp = SubResource("Gradient_wxnld")
+
+[node name="Sprite" type="Node2D" parent="." unique_id=1445111960]
+
+[node name="Ray" type="Node2D" parent="Sprite" unique_id=1415425330]
+
+[node name="playerRay" type="RayCast2D" parent="Sprite/Ray" unique_id=1255579585]
+position = Vector2(0, -22)
+target_position = Vector2(45, 0)
+collision_mask = 2
+
+[node name="wallRay" type="RayCast2D" parent="Sprite/Ray" unique_id=807141594]
+position = Vector2(0, -22)
+target_position = Vector2(-28, 0)
+
+[node name="floorRay" type="RayCast2D" parent="Sprite/Ray" unique_id=1219665679]
+position = Vector2(-24, -16)
+target_position = Vector2(0, 23)
+
+[node name="DeathSfx" type="AudioStreamPlayer" parent="." unique_id=1907249660]
+stream = ExtResource("2_5n1qu")
+volume_db = -3.0
+bus = &"sfx"
+
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]

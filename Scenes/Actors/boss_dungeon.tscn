@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://c8471b05s2m8y"]
+
+[ext_resource type="PackedScene" uid="uid://d27bcsmx82vfa" path="res://Scenes/Actors/enemy.tscn" id="1_enemy"]
+[ext_resource type="Script" uid="uid://dwj7q7opxlh0" path="res://Scenes/Actors/boss_dungeon.gd" id="2_boss_script"]
+[ext_resource type="Texture2D" uid="uid://cewimrs44p480" path="res://Assets/Spritesheet/1_KNIGHT/Knight_01__WALK_000.png" id="3_k0"]
+[ext_resource type="Texture2D" uid="uid://c34clavjfk01f" path="res://Assets/Spritesheet/1_KNIGHT/Knight_01__WALK_001.png" id="4_k1"]
+[ext_resource type="Texture2D" uid="uid://b53j3vaqw2idu" path="res://Assets/Spritesheet/1_KNIGHT/Knight_01__WALK_002.png" id="5_k2"]
+[ext_resource type="Texture2D" uid="uid://d1kkdf3t8goak" path="res://Assets/Spritesheet/1_KNIGHT/Knight_01__WALK_003.png" id="6_k3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_boss"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_k0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_k1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_k2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_k3")
+}],
+"loop": true,
+"name": &"boss_walk",
+"speed": 8.0
+}]
+
+[node name="BossDungeon" unique_id=600502477 instance=ExtResource("1_enemy")]
+scale = Vector2(1.8, 1.8)
+script = ExtResource("2_boss_script")
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=587424215]
+position = Vector2(0, -35)
+scale = Vector2(1.8, 1.8)
+
+[node name="CollisionShape2D2" parent="HitArea" parent_id_path=PackedInt32Array(1115411835) index="0" unique_id=2008793250]
+position = Vector2(0, -35)
+scale = Vector2(1.8, 1.8)
+
+[node name="AnimateSprite" type="AnimatedSprite2D" parent="Sprite" parent_id_path=PackedInt32Array(1445111960) index="0" unique_id=87960724]
+position = Vector2(0, -32)
+scale = Vector2(0.24, 0.24)
+sprite_frames = SubResource("SpriteFrames_boss")
+animation = &"boss_walk"
+autoplay = "boss_walk"

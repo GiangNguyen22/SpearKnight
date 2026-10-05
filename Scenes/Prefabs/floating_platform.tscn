@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://df7x8h2p4g1kl"]
+
+[ext_resource type="Script" path="res://Scenes/Prefabs/floating_platform.gd" id="1_fp"]
+[ext_resource type="Texture2D" path="res://Assets/Spritesheet/floating_platform.png" id="2_tex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fp"]
+size = Vector2(88, 14)
+
+[node name="FloatingPlatform" type="AnimatableBody2D"]
+collision_layer = 1
+collision_mask = 0
+sync_to_physics = false
+script = ExtResource("1_fp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_fp")
+one_way_collision = true

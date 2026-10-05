@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://c6cay8w4m2p1q"]
+
+[ext_resource type="Script" uid="uid://c7k8m9p1q2r3s" path="res://Scenes/Prefabs/torch_light.gd" id="1_torch"]
+[ext_resource type="Texture2D" uid="uid://dia1dp34sme5l" path="res://Assets/Spritesheet/light_w.png" id="2_light_tex"]
+
+[node name="TorchLight" type="PointLight2D"]
+color = Color(1, 0.75, 0.35, 1)
+energy = 1.1
+texture = ExtResource("2_light_tex")
+texture_scale = 1.0
+script = ExtResource("1_torch")

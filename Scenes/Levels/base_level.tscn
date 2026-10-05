@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://bjntpxb1c8jxn"]
+
+[ext_resource type="Script" uid="uid://cwm5w1bxx3js3" path="res://Scenes/Levels/base_level.gd" id="1_iemmg"]
+[ext_resource type="PackedScene" uid="uid://cyti38f0lagf2" path="res://Scenes/Prefabs/level_finish_door.tscn" id="2_3b8rg"]
+[ext_resource type="PackedScene" uid="uid://w7m6tehvvy3g" path="res://Scenes/Actors/player.tscn" id="4_hr04v"]
+[ext_resource type="PackedScene" uid="uid://cdwabmqtlxr1y" path="res://Scenes/Levels/game_ui.tscn" id="5_71eip"]
+[ext_resource type="AudioStream" uid="uid://dhmn57nc23ah1" path="res://Assets/Sound/walen.ogg" id="6_34r03"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="7_xghcx"]
+[ext_resource type="Texture2D" uid="uid://tvq4stxhvl8u" path="res://Assets/BG/mountains.png" id="8_mountains"]
+[ext_resource type="Texture2D" uid="uid://dkc8rdq3j7ppf" path="res://Assets/BG/mountainA.png" id="9_mountainA"]
+[ext_resource type="Texture2D" uid="uid://bwsqehu7kq7cj" path="res://Assets/BG/cloudLayer1.png" id="10_clouds"]
+
+[node name="BaseLevel" type="Node2D" unique_id=1997201631]
+script = ExtResource("1_iemmg")
+
+[node name="DungeonAmbiance" type="CanvasModulate" parent="."]
+color = Color(0.78, 0.78, 0.85, 1)
+
+[node name="LevelFinishDoor" parent="." unique_id=1788542095 instance=ExtResource("2_3b8rg")]
+z_index = 1
+position = Vector2(1592, 400)
+
+[node name="Level" type="Node2D" parent="." unique_id=1752500785]
+
+[node name="Background1" type="Parallax2D" parent="Level" unique_id=1072429833]
+z_index = -10
+scroll_scale = Vector2(0.15, 0.15)
+repeat_size = Vector2(1152, 0)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Level/Background1"]
+position = Vector2(576, 324)
+scale = Vector2(1.2, 1.2)
+modulate = Color(0.6, 0.65, 0.85, 1)
+texture = ExtResource("8_mountains")
+
+[node name="Background2" type="Parallax2D" parent="Level" unique_id=1070008654]
+z_index = -9
+scroll_scale = Vector2(0.4, 0.4)
+repeat_size = Vector2(1152, 0)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Level/Background2"]
+position = Vector2(576, 360)
+scale = Vector2(1.1, 1.1)
+modulate = Color(0.7, 0.75, 0.9, 0.85)
+texture = ExtResource("9_mountainA")
+
+[node name="Background3" type="Parallax2D" parent="Level" unique_id=1070008655]
+z_index = -8
+scroll_scale = Vector2(0.7, 0.7)
+repeat_size = Vector2(1152, 0)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Level/Background3"]
+position = Vector2(576, 250)
+scale = Vector2(1.0, 1.0)
+modulate = Color(1, 1, 1, 0.35)
+texture = ExtResource("10_clouds")
+
+[node name="Player" parent="." unique_id=850213228 instance=ExtResource("4_hr04v")]
+unique_name_in_owner = true
+z_index = 1
+position = Vector2(79.99999, 324)
+
+[node name="Coins" type="Node2D" parent="." unique_id=1530662565]
+z_index = 2
+
+[node name="Enemies" type="Node2D" parent="." unique_id=1580630701]
+
+[node name="UserInterface" parent="." unique_id=1799764374 instance=ExtResource("5_71eip")]
+
+[node name="Label" type="Label" parent="UserInterface" unique_id=1103718868]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -11.5
+offset_right = 27.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_xghcx")
+theme_override_font_sizes/font_size = 60
+text = "Level x"
+metadata/_edit_lock_ = true
+
+[node name="Text" type="Node2D" parent="." unique_id=416249055]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=724032201]
+stream = ExtResource("6_34r03")
+bus = &"music"
+
+[connection signal="hit_enemy" from="Player" to="." method="_on_player_hit_enemy"]
+[connection signal="hit_trap" from="Player" to="." method="_on_player_hit_trap"]
+[connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]

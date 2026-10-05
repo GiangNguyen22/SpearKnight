@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://bp4l1nlnh8oq1"]
+
+[ext_resource type="Texture2D" uid="uid://bn7p1ettcrj43" path="res://Assets/Spritesheet/spear.png" id="1_qddpi"]
+[ext_resource type="Texture2D" uid="uid://jaegp53ccc7w" path="res://Assets/Spritesheet/platformPack_tilesheet.png" id="1_qp3at"]
+[ext_resource type="Texture2D" uid="uid://dia1dp34sme5l" path="res://Assets/Spritesheet/light_w.png" id="3_light_tex"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rf4eo"]
+radius = 27.33693
+
+[sub_resource type="Animation" id="Animation_qddpi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Center:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Center/StaticBody2D/CollisionShape2D/PlatformPackTilesheet:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-5.9604623e-08]
+}
+
+[sub_resource type="Animation" id="Animation_jne72"]
+resource_name = "idle"
+length = 3.0000000000000004
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Center:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283185307179586]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Center/StaticBody2D/CollisionShape2D/PlatformPackTilesheet:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-5.9604623e-08, 6.283185307179586]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h7loc"]
+_data = {
+&"RESET": SubResource("Animation_qddpi"),
+&"idle": SubResource("Animation_jne72")
+}
+
+[node name="Trap2" type="Node2D" unique_id=1894763376]
+
+[node name="Center" type="Node2D" parent="." unique_id=155161605]
+
+[node name="Spear" type="Sprite2D" parent="Center" unique_id=267989412]
+position = Vector2(9.094947e-13, 73.000015)
+rotation = 3.1415927
+scale = Vector2(0.42857143, 0.6403509)
+texture = ExtResource("1_qddpi")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Center" unique_id=2111426041 groups=["Traps"]]
+position = Vector2(17.38456, 46.796585)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Center/StaticBody2D" unique_id=426169161]
+position = Vector2(-17.38456, 61.203415)
+shape = SubResource("CircleShape2D_rf4eo")
+
+[node name="PlatformPackTilesheet" type="Sprite2D" parent="Center/StaticBody2D/CollisionShape2D" unique_id=1226813019]
+position = Vector2(1.4558879, -0.8091358)
+modulate = Color(1.15, 1.15, 1.18, 1)
+scale = Vector2(1.15, 1.15)
+texture = ExtResource("1_qp3at")
+hframes = 14
+vframes = 7
+frame = 71
+
+[node name="PlatformPackTilesheet" type="Sprite2D" parent="Center" unique_id=1078934043]
+position = Vector2(1.4312706, 0.0905838)
+rotation = 1.6115934
+scale = Vector2(0.6, 0.6)
+modulate = Color(1.15, 1.15, 1.18, 1)
+texture = ExtResource("1_qp3at")
+hframes = 14
+vframes = 7
+frame = 71
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=713248978]
+libraries/ = SubResource("AnimationLibrary_h7loc")
+autoplay = &"idle"
+speed_scale = 0.5

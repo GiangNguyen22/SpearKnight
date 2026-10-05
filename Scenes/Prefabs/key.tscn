@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c7vkeyitem001"]
+
+[ext_resource type="Script" path="res://Scenes/Prefabs/key.gd" id="1_key"]
+[ext_resource type="Texture2D" path="res://Assets/Spritesheet/golden_key.png" id="2_img"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/FX/key_pickup.wav" id="3_sfx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_key"]
+radius = 16.0
+height = 42.0
+
+[node name="Key" type="Area2D" groups=["Items", "Key"]]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_key")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.045, 0.045)
+texture = ExtResource("2_img")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_key")
+
+[node name="PickupSfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_sfx")
+volume_db = 2.0
+bus = &"sfx"

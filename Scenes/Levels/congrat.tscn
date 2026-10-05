@@ -1,0 +1,258 @@
+[gd_scene load_steps=10 format=3 uid="uid://dq14hgrjxp5uc"]
+
+[ext_resource type="Script" uid="uid://cgdtkknhgivob" path="res://Scenes/Levels/congrat.gd" id="1_ynq6i"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="2_51s5g"]
+[ext_resource type="PackedScene" uid="uid://puc4l62gx6et" path="res://Scenes/Prefabs/button_exit.tscn" id="3_weisi"]
+[ext_resource type="Texture2D" path="res://Assets/BG/scifi_distant_sky.jpg" id="4_sky_far"]
+[ext_resource type="Texture2D" path="res://Assets/BG/scifi_base_front.jpg" id="5_sky_near"]
+[ext_resource type="Texture2D" path="res://Assets/BG/mountains.png" id="6_hills_far"]
+[ext_resource type="Texture2D" path="res://Assets/BG/cloudLayerB1.png" id="7_hills_near"]
+[ext_resource type="AudioStream" uid="uid://brry7j6ujsru1" path="res://untitled_647.mp3" id="6_h1cxy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.019607844, 0.050980393, 0.07450981, 0.62)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.85, 0.7, 0.25, 0.55)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Congrat" type="Node2D"]
+script = ExtResource("1_ynq6i")
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="SkyFar" type="Sprite2D" parent="Background"]
+z_index = -40
+texture_filter = 1
+modulate = Color(1, 1, 1, 0.9)
+scale = Vector2(0.92, 0.92)
+texture = ExtResource("4_sky_far")
+
+[node name="SkyNear" type="Sprite2D" parent="Background"]
+z_index = -32
+texture_filter = 1
+modulate = Color(1, 1, 1, 0.92)
+scale = Vector2(0.98, 0.98)
+texture = ExtResource("5_sky_near")
+
+[node name="HillsFar" type="Sprite2D" parent="Background"]
+z_index = -28
+texture_filter = 1
+modulate = Color(0.15, 0.2, 0.26, 0.85)
+texture = ExtResource("6_hills_far")
+
+[node name="HillsNear" type="Sprite2D" parent="Background"]
+z_index = -20
+texture_filter = 1
+modulate = Color(0.07, 0.1, 0.14, 0.9)
+texture = ExtResource("7_hills_near")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_51s5g")
+
+[node name="Scrim" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.13, 0.1, 0.03, 0.34)
+
+[node name="Panel" type="Panel" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -310.0
+offset_top = -130.0
+offset_right = 310.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Title" type="Label" parent="UI/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.0
+offset_top = -104.0
+offset_right = 290.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.35, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "CHIẾN THẮNG!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LblScoreCaption" type="Label" parent="UI/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.0
+offset_top = -48.0
+offset_right = -110.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.55, 0.78, 0.88, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 16
+text = "ĐIỂM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LblScore" type="Label" parent="UI/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.0
+offset_top = -28.0
+offset_right = -110.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LblTimeCaption" type="Label" parent="UI/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -48.0
+offset_right = 90.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.55, 0.78, 0.88, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 16
+text = "THỜI GIAN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LblTime" type="Label" parent="UI/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -28.0
+offset_right = 90.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 32
+text = "00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LblLivesCaption" type="Label" parent="UI/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 110.0
+offset_top = -48.0
+offset_right = 290.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.55, 0.78, 0.88, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 16
+text = "MẠNG ĐÃ DÙNG"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LblLives" type="Label" parent="UI/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 110.0
+offset_top = -28.0
+offset_right = 290.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="btnExit" parent="UI/Panel" index="0" instance=ExtResource("3_weisi")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = 32.0
+offset_right = 125.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit to Menu"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_h1cxy")
+volume_db = 0.0
+autoplay = true
+bus = &"music"
+
+[connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]

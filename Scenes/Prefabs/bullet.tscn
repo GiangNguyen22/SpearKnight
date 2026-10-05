@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://c5y568p25r7rl"]
+
+[ext_resource type="Script" uid="uid://lfkiq2j22hff" path="res://Scenes/Prefabs/bullet.gd" id="1_yovq8"]
+[ext_resource type="Texture2D" path="res://Assets/Spritesheet/laser_bullet.png" id="2_laser"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pkqe3"]
+friction = 0.2
+bounce = 0.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mqoqv"]
+radius = 12.0
+
+[node name="Bullet" type="RigidBody2D" unique_id=737966296 groups=["Bullet"]]
+collision_layer = 2
+collision_mask = 5
+physics_material_override = SubResource("PhysicsMaterial_pkqe3")
+gravity_scale = 0.25
+script = ExtResource("1_yovq8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=441138516]
+shape = SubResource("CircleShape2D_mqoqv")
+
+[node name="LaserBullet" type="Sprite2D" parent="." unique_id=308939572]
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("2_laser")
