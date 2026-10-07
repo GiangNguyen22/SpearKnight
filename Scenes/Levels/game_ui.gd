@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var key_label: Label = %KeyLabel if has_node("%KeyLabel") else null
 @onready var hp_bar: ProgressBar = %ProgressBar if has_node("%ProgressBar") else null
 @onready var hp_label: Label = %HPLabel if has_node("%HPLabel") else null
+@onready var max_hp_label: Label = %MaxHPLabel if has_node("%MaxHPLabel") else null
 @onready var life_rect: TextureRect = %LifeRect if has_node("%LifeRect") else null
 
 @onready var btn_sound: Button = %BtnSound if has_node("%BtnSound") else null
@@ -65,7 +66,12 @@ func _process(_delta: float) -> void:
 		if key_label:
 			key_label.text = "Keys: %d/%d" % [gm.keys_collected, gm.required_keys]
 		if hp_bar:
+			hp_bar.max_value = gm.max_hp
 			hp_bar.value = gm.hp
+		if hp_label and hp_label.text != "HP":
+			hp_label.text = "HP"
+		if max_hp_label:
+			max_hp_label.text = "%d HP" % gm.max_hp
 		if life_rect:
 			# Each heart icon is 48px wide as in original game
 			life_rect.size.x = 48.0 * float(gm.life)

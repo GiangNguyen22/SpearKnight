@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://d8x42m9k1p3qn"]
+
+[ext_resource type="Script" path="res://Scenes/Prefabs/bullet_boss_abyss.gd" id="1_bba_gd"]
+[ext_resource type="Texture2D" path="res://Assets/Spritesheet/laser_bullet.png" id="2_bba_tex"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bba"]
+radius = 16.0
+
+[node name="BulletBossAbyss" type="Area2D" groups=["EnemyBullet"]]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_bba_gd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(2, 0.4, 2.5, 1)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_bba_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bba")

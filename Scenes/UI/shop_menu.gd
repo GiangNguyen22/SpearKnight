@@ -119,7 +119,7 @@ func _on_btn_life_pressed() -> void:
 	var gm = get_node_or_null("/root/GameManager")
 	if gm == null:
 		return
-	var cost = 30
+	var cost = 25
 	if gm.score >= cost:
 		if gm.life >= gm.max_life:
 			show_status("Mạng đã đạt tối đa (%d)!" % gm.max_life, true)

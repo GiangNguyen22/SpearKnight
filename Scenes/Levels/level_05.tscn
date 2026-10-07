@@ -1,0 +1,341 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://Scenes/Levels/base_level.gd" id="1_nrvyc"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/level_finish_door.tscn" id="2_tsipv"]
+[ext_resource type="Script" path="res://Scenes/Prefabs/level_finish_door.gd" id="3_ovhm1"]
+[ext_resource type="PackedScene" path="res://Scenes/Levels/congrat.tscn" id="4_nkdd7"]
+[ext_resource type="Texture2D" path="res://Assets/BG/mountains.png" id="5_u72br"]
+[ext_resource type="Texture2D" path="res://Assets/BG/mountainA.png" id="6_aa755"]
+[ext_resource type="Texture2D" path="res://Assets/BG/cloudLayer1.png" id="7_44smn"]
+[ext_resource type="TileSet" path="res://Scenes/Prefabs/ground_tile_set.tres" id="8_stprg"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/trap_1.tscn" id="9_h0g4a"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/trap_laser.tscn" id="10_iv3sq"]
+[ext_resource type="Script" path="res://Scenes/Prefabs/trap_laser.gd" id="11_dx6ub"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/falling_platform.tscn" id="12_vntcs"]
+[ext_resource type="Script" path="res://Scenes/Prefabs/falling_platform.gd" id="13_3lo72"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/trap_2.tscn" id="14_6oq4i"]
+[ext_resource type="PackedScene" path="res://Scenes/Actors/player.tscn" id="15_wiybd"]
+[ext_resource type="Script" path="res://Scenes/Actors/player.gd" id="16_hn05j"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/bullet.tscn" id="17_m1jti"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/key.tscn" id="18_exysr"]
+[ext_resource type="Script" path="res://Scenes/Prefabs/key.gd" id="19_jokqx"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/Coin.tscn" id="20_r5rlx"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/heal_potion.tscn" id="21_saok3"]
+[ext_resource type="PackedScene" path="res://Scenes/Actors/monster_slim.tscn" id="22_cf18a"]
+[ext_resource type="Script" path="res://Scenes/Actors/monster_small.gd" id="23_72mq3"]
+[ext_resource type="PackedScene" path="res://Scenes/Actors/monster_mushroom.tscn" id="24_vpnn6"]
+[ext_resource type="PackedScene" path="res://Scenes/Actors/boss_abyss.tscn" id="25_gvset"]
+[ext_resource type="Script" path="res://Scenes/Actors/boss_abyss.gd" id="26_qds6m"]
+[ext_resource type="PackedScene" path="res://Scenes/Levels/game_ui.tscn" id="27_x503m"]
+[ext_resource type="Script" path="res://Scenes/Levels/game_ui.gd" id="28_qgmqn"]
+[ext_resource type="Theme" path="res://Scenes/Prefabs/theme.tres" id="29_vyilg"]
+[ext_resource type="AudioStream" path="res://Assets/Sound/walen.ogg" id="30_bslim"]
+[ext_resource type="PackedScene" path="res://Scenes/Prefabs/torch_light.tscn" id="31_8tngq"]
+[ext_resource type="Texture2D" path="res://Assets/Spritesheet/light_w.png" id="32_j0yrs"]
+[ext_resource type="Script" path="res://Scenes/Prefabs/torch_light.gd" id="33_ju0pp"]
+
+[node name="BaseLevel" type="Node2D" unique_id=1997201631]
+script = ExtResource("1_nrvyc")
+
+[node name="DungeonAmbiance" type="CanvasModulate" parent="." unique_id=1039920813]
+color = Color(0.88, 0.76, 0.88, 1)
+
+[node name="LevelFinishDoor" type="Area2D" parent="." unique_id=1788542095 instance=ExtResource("2_tsipv")]
+z_index = 1
+position = Vector2(2560, 384)
+collision_mask = 2
+script = ExtResource("3_ovhm1")
+next_scene = ExtResource("4_nkdd7")
+required_keys = 4
+
+[node name="Level" type="Node2D" parent="." unique_id=1752500785]
+
+[node name="Background1" type="Parallax2D" parent="Level" unique_id=1072429833]
+modulate = Color(0.85, 0.45, 0.55, 1)
+z_index = -10
+scroll_scale = Vector2(0.15, 0.15)
+repeat_size = Vector2(1152, 0)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Level/Background1" unique_id=1288152663]
+modulate = Color(0.6, 0.65, 0.85, 1)
+position = Vector2(576, 324)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("5_u72br")
+
+[node name="Background2" type="Parallax2D" parent="Level" unique_id=1070008654]
+modulate = Color(0.75, 0.35, 0.45, 0.85)
+z_index = -9
+scroll_scale = Vector2(0.4, 0.4)
+repeat_size = Vector2(1152, 0)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Level/Background2" unique_id=2146883174]
+modulate = Color(0.7, 0.75, 0.9, 0.85)
+position = Vector2(576, 360)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("6_aa755")
+
+[node name="Background3" type="Parallax2D" parent="Level" unique_id=1070008655]
+z_index = -8
+scroll_scale = Vector2(0.7, 0.7)
+repeat_size = Vector2(1152, 0)
+repeat_times = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Level/Background3" unique_id=1876899494]
+modulate = Color(1, 1, 1, 0.35)
+position = Vector2(576, 250)
+texture = ExtResource("7_44smn")
+
+[node name="Ground" type="TileMapLayer" parent="Level" unique_id=870931933]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD//wIAAAADAAAAAAD//wMAAAADAAAAAAD//wQAAAADAAAAAAD//wUAAAADAAAAAAD//wYAAAADAAAAAAD//wcAAAADAAAAAAD//wgAAAADAAAAAAAAAAcAAAADAAAAAAAAAAgAAAADAAAAAAABAAcAAAADAAAAAAABAAgAAAADAAAAAAACAAcAAAADAAAAAAACAAgAAAADAAAAAAADAAcAAAADAAAAAAADAAgAAAADAAAAAAAEAAcAAAADAAAAAAAEAAgAAAADAAAAAAAFAAcAAAADAAAAAAAFAAgAAAADAAAAAAAGAAcAAAADAAAAAAAGAAgAAAADAAAAAAAHAAcAAAADAAAAAAAHAAgAAAADAAAAAAAIAAcAAAADAAAAAAAIAAgAAAADAAAAAAAEAAQAAAADAAAAAAAFAAQAAAADAAAAAAARAAcAAAADAAAAAAARAAgAAAADAAAAAAASAAcAAAADAAAAAAASAAgAAAADAAAAAAATAAcAAAADAAAAAAATAAgAAAADAAAAAAAUAAcAAAADAAAAAAAUAAgAAAADAAAAAAAVAAcAAAADAAAAAAAVAAgAAAADAAAAAAAWAAcAAAADAAAAAAAWAAgAAAADAAAAAAAXAAcAAAADAAAAAAAXAAgAAAADAAAAAAATAAQAAAADAAAAAAAUAAQAAAADAAAAAAAVAAQAAAADAAAAAAAaAAcAAAADAAAAAAAaAAgAAAADAAAAAAAbAAcAAAADAAAAAAAbAAgAAAADAAAAAAAeAAcAAAADAAAAAAAeAAgAAAADAAAAAAAfAAcAAAADAAAAAAAfAAgAAAADAAAAAAAgAAcAAAADAAAAAAAgAAgAAAADAAAAAAAhAAcAAAADAAAAAAAhAAgAAAADAAAAAAAiAAcAAAADAAAAAAAiAAgAAAADAAAAAAAjAAcAAAADAAAAAAAjAAgAAAADAAAAAAAkAAcAAAADAAAAAAAkAAgAAAADAAAAAAAlAAcAAAADAAAAAAAlAAgAAAADAAAAAAAmAAcAAAADAAAAAAAmAAgAAAADAAAAAAAnAAcAAAADAAAAAAAnAAgAAAADAAAAAAAoAAcAAAADAAAAAAAoAAgAAAADAAAAAAApAAcAAAADAAAAAAApAAgAAAADAAAAAAAeAAMAAAADAAAAAAAeAAQAAAADAAAAAAAeAAUAAAADAAAAAAAeAAYAAAADAAAAAAApAAMAAAADAAAAAAApAAQAAAADAAAAAAApAAUAAAADAAAAAAApAAYAAAADAAAAAAAhAAQAAAADAAAAAAAiAAQAAAADAAAAAAAlAAQAAAADAAAAAAAmAAQAAAADAAAAAAA=")
+tile_set = ExtResource("8_stprg")
+
+[node name="Sawblade1" type="StaticBody2D" parent="Level" unique_id=1930518021 groups=["Traps"] instance=ExtResource("9_h0g4a")]
+position = Vector2(320, 420)
+collision_layer = 9
+collision_mask = 2
+
+[node name="TrapLaser1" type="Area2D" parent="Level" unique_id=1117859570 groups=["Traps"] instance=ExtResource("10_iv3sq")]
+position = Vector2(520, 350)
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("11_dx6ub")
+toggle_interval = 1.2
+
+[node name="FallingPlat1" type="AnimatableBody2D" parent="Level" unique_id=1555657091 instance=ExtResource("12_vntcs")]
+position = Vector2(680, 420)
+collision_mask = 0
+sync_to_physics = false
+script = ExtResource("13_3lo72")
+
+[node name="FallingPlat2" type="AnimatableBody2D" parent="Level" unique_id=1965615612 instance=ExtResource("12_vntcs")]
+position = Vector2(830, 350)
+collision_mask = 0
+sync_to_physics = false
+script = ExtResource("13_3lo72")
+
+[node name="FallingPlat3" type="AnimatableBody2D" parent="Level" unique_id=961289577 instance=ExtResource("12_vntcs")]
+position = Vector2(980, 410)
+collision_mask = 0
+sync_to_physics = false
+script = ExtResource("13_3lo72")
+
+[node name="SpikePendulum1" type="Node2D" parent="Level" unique_id=1894763376 instance=ExtResource("14_6oq4i")]
+position = Vector2(830, 210)
+
+[node name="Sawblade2" type="StaticBody2D" parent="Level" unique_id=1577569780 groups=["Traps"] instance=ExtResource("9_h0g4a")]
+position = Vector2(1340, 420)
+collision_layer = 9
+collision_mask = 2
+
+[node name="TrapLaser2" type="Area2D" parent="Level" unique_id=659451215 groups=["Traps"] instance=ExtResource("10_iv3sq")]
+position = Vector2(1460, 340)
+rotation = 1.5708
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("11_dx6ub")
+toggle_interval = 1.4
+
+[node name="FallingPlat4" type="AnimatableBody2D" parent="Level" unique_id=774030590 instance=ExtResource("12_vntcs")]
+position = Vector2(1600, 410)
+collision_mask = 0
+sync_to_physics = false
+script = ExtResource("13_3lo72")
+
+[node name="TrapLaser3" type="Area2D" parent="Level" unique_id=923702977 groups=["Traps"] instance=ExtResource("10_iv3sq")]
+position = Vector2(1728, 350)
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("11_dx6ub")
+toggle_interval = 1.0
+damage = 30.0
+
+[node name="SpikePendulum2" type="Node2D" parent="Level" unique_id=1603668152 instance=ExtResource("14_6oq4i")]
+position = Vector2(1728, 200)
+
+[node name="FallingPlat5" type="AnimatableBody2D" parent="Level" unique_id=1606551179 instance=ExtResource("12_vntcs")]
+position = Vector2(1860, 410)
+collision_mask = 0
+sync_to_physics = false
+script = ExtResource("13_3lo72")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=850213228 groups=["Player"] instance=ExtResource("15_wiybd")]
+unique_name_in_owner = true
+z_index = 1
+position = Vector2(112, 380)
+collision_layer = 2
+script = ExtResource("16_hn05j")
+bullet_scene = ExtResource("17_m1jti")
+
+[node name="Coins" type="Node2D" parent="." unique_id=1530662565]
+z_index = 2
+
+[node name="Key1" type="Area2D" parent="Coins" unique_id=1078603349 groups=["Items", "Key"] instance=ExtResource("18_exysr")]
+position = Vector2(320, 210)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("19_jokqx")
+
+[node name="Key2" type="Area2D" parent="Coins" unique_id=2089442674 groups=["Items", "Key"] instance=ExtResource("18_exysr")]
+position = Vector2(830, 280)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("19_jokqx")
+
+[node name="Key3" type="Area2D" parent="Coins" unique_id=359576858 groups=["Items", "Key"] instance=ExtResource("18_exysr")]
+position = Vector2(1344, 210)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("19_jokqx")
+
+[node name="Key4" type="Area2D" parent="Coins" unique_id=1452536741 groups=["Items", "Key"] instance=ExtResource("18_exysr")]
+position = Vector2(1728, 270)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("19_jokqx")
+
+[node name="Coin1" type="Area2D" parent="Coins" unique_id=251510796 instance=ExtResource("20_r5rlx")]
+position = Vector2(200, 380)
+collision_mask = 3
+
+[node name="Coin2" type="Area2D" parent="Coins" unique_id=737841368 instance=ExtResource("20_r5rlx")]
+position = Vector2(450, 380)
+collision_mask = 3
+
+[node name="Coin3" type="Area2D" parent="Coins" unique_id=1320623528 instance=ExtResource("20_r5rlx")]
+position = Vector2(750, 370)
+collision_mask = 3
+
+[node name="Coin4" type="Area2D" parent="Coins" unique_id=1690442797 instance=ExtResource("20_r5rlx")]
+position = Vector2(910, 360)
+collision_mask = 3
+
+[node name="Coin5" type="Area2D" parent="Coins" unique_id=1411871412 instance=ExtResource("20_r5rlx")]
+position = Vector2(1180, 380)
+collision_mask = 3
+
+[node name="Coin6" type="Area2D" parent="Coins" unique_id=1077712152 instance=ExtResource("20_r5rlx")]
+position = Vector2(1280, 210)
+collision_mask = 3
+
+[node name="Coin7" type="Area2D" parent="Coins" unique_id=776019884 instance=ExtResource("20_r5rlx")]
+position = Vector2(1400, 210)
+collision_mask = 3
+
+[node name="Coin8" type="Area2D" parent="Coins" unique_id=19385970 instance=ExtResource("20_r5rlx")]
+position = Vector2(2112, 210)
+collision_mask = 3
+
+[node name="Coin9" type="Area2D" parent="Coins" unique_id=1321961811 instance=ExtResource("20_r5rlx")]
+position = Vector2(2430, 210)
+collision_mask = 3
+
+[node name="HealPotion1" type="Area2D" parent="Coins" unique_id=242563240 instance=ExtResource("21_saok3")]
+position = Vector2(1140, 380)
+collision_layer = 8
+collision_mask = 2
+
+[node name="HealPotion2" type="Area2D" parent="Coins" unique_id=713000400 instance=ExtResource("21_saok3")]
+position = Vector2(2176, 210)
+collision_layer = 8
+collision_mask = 2
+
+[node name="Enemies" type="Node2D" parent="." unique_id=1580630701]
+
+[node name="EnemySlime1" type="CharacterBody2D" parent="Enemies" unique_id=600502477 groups=["Enemy"] instance=ExtResource("22_cf18a")]
+position = Vector2(1250, 400)
+collision_layer = 4
+collision_mask = 13
+script = ExtResource("23_72mq3")
+
+[node name="EnemyMushroom1" type="CharacterBody2D" parent="Enemies" unique_id=1786228426 groups=["Enemy"] instance=ExtResource("24_vpnn6")]
+position = Vector2(1500, 400)
+collision_layer = 4
+collision_mask = 13
+script = ExtResource("23_72mq3")
+
+[node name="BossAbyss" type="CharacterBody2D" parent="Enemies" unique_id=565318899 groups=["Enemy"] instance=ExtResource("25_gvset")]
+position = Vector2(2300, 448)
+collision_layer = 4
+collision_mask = 13
+script = ExtResource("26_qds6m")
+speed = 100.0
+
+[node name="UserInterface" type="CanvasLayer" parent="." unique_id=1799764374 instance=ExtResource("27_x503m")]
+script = ExtResource("28_qgmqn")
+
+[node name="Label" type="Label" parent="UserInterface" unique_id=1103718868]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -11.5
+offset_right = 27.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("29_vyilg")
+theme_override_font_sizes/font_size = 60
+text = "Level 5 - Lõi Hầm Ngục"
+metadata/_edit_lock_ = true
+
+[node name="Text" type="Node2D" parent="." unique_id=416249055]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=724032201]
+stream = ExtResource("30_bslim")
+bus = &"music"
+
+[node name="TorchRed1" type="PointLight2D" parent="." unique_id=69614159 instance=ExtResource("31_8tngq")]
+position = Vector2(250, 200)
+color = Color(1, 0.25, 0.25, 1)
+energy = 1.8
+texture = ExtResource("32_j0yrs")
+script = ExtResource("33_ju0pp")
+
+[node name="TorchRed2" type="PointLight2D" parent="." unique_id=61482894 instance=ExtResource("31_8tngq")]
+position = Vector2(1200, 220)
+color = Color(1, 0.25, 0.25, 1)
+energy = 1.8
+texture = ExtResource("32_j0yrs")
+script = ExtResource("33_ju0pp")
+
+[node name="TorchRed3" type="PointLight2D" parent="." unique_id=1026532052 instance=ExtResource("31_8tngq")]
+position = Vector2(1728, 160)
+color = Color(1, 0.25, 0.25, 1)
+energy = 1.8
+texture = ExtResource("32_j0yrs")
+script = ExtResource("33_ju0pp")
+
+[node name="TorchRed4" type="PointLight2D" parent="." unique_id=1459689815 instance=ExtResource("31_8tngq")]
+position = Vector2(2050, 200)
+color = Color(1, 0.25, 0.25, 1)
+energy = 1.8
+texture = ExtResource("32_j0yrs")
+script = ExtResource("33_ju0pp")
+
+[node name="TorchRed5" type="PointLight2D" parent="." unique_id=108108362 instance=ExtResource("31_8tngq")]
+position = Vector2(2500, 200)
+color = Color(1, 0.25, 0.25, 1)
+energy = 1.8
+texture = ExtResource("32_j0yrs")
+script = ExtResource("33_ju0pp")
+
+[connection signal="body_entered" from="LevelFinishDoor" to="LevelFinishDoor" method="_on_body_entered"]
+[connection signal="hit_enemy" from="Player" to="." method="_on_player_hit_enemy"]
+[connection signal="hit_trap" from="Player" to="." method="_on_player_hit_trap"]
+[connection signal="body_entered" from="Coins/Coin1" to="Coins/Coin1" method="_on_body_entered"]
+[connection signal="body_entered" from="Coins/Coin2" to="Coins/Coin2" method="_on_body_entered"]
+[connection signal="body_entered" from="Coins/Coin3" to="Coins/Coin3" method="_on_body_entered"]
+[connection signal="body_entered" from="Coins/Coin4" to="Coins/Coin4" method="_on_body_entered"]
+[connection signal="body_entered" from="Coins/Coin5" to="Coins/Coin5" method="_on_body_entered"]
+[connection signal="body_entered" from="Coins/Coin6" to="Coins/Coin6" method="_on_body_entered"]
+[connection signal="body_entered" from="Coins/Coin7" to="Coins/Coin7" method="_on_body_entered"]
+[connection signal="body_entered" from="Coins/Coin8" to="Coins/Coin8" method="_on_body_entered"]
+[connection signal="body_entered" from="Coins/Coin9" to="Coins/Coin9" method="_on_body_entered"]
+[connection signal="body_entered" from="Coins/HealPotion1" to="Coins/HealPotion1" method="_on_body_entered"]
+[connection signal="body_entered" from="Coins/HealPotion2" to="Coins/HealPotion2" method="_on_body_entered"]
+[connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]

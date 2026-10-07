@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://b5471b05s9m8z"]
+
+[ext_resource type="PackedScene" uid="uid://d27bcsmx82vfa" path="res://Scenes/Actors/enemy.tscn" id="1_enemy"]
+[ext_resource type="Script" path="res://Scenes/Actors/boss_abyss.gd" id="2_abyss_script"]
+[ext_resource type="Texture2D" path="res://Assets/Spritesheet/2_TROLL/Troll_02_1_WALK_000.png" id="3_t0"]
+[ext_resource type="Texture2D" path="res://Assets/Spritesheet/2_TROLL/Troll_02_1_WALK_001.png" id="4_t1"]
+[ext_resource type="Texture2D" path="res://Assets/Spritesheet/2_TROLL/Troll_02_1_WALK_002.png" id="5_t2"]
+[ext_resource type="Texture2D" path="res://Assets/Spritesheet/2_TROLL/Troll_02_1_WALK_003.png" id="6_t3"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/CloudTexture.png" id="7_shield_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Spritesheet/laser_bullet.png" id="8_laser_tex"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_boss_abyss"]
+radius = 35.0
+height = 110.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_abyss"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_t0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_t1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_t2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_t3")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_laser_floor"]
+size = Vector2(800, 24)
+
+[node name="BossAbyss" instance=ExtResource("1_enemy")]
+script = ExtResource("2_abyss_script")
+max_hp = 800.0
+hp = 800.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(0, -55)
+shape = SubResource("CapsuleShape2D_boss_abyss")
+
+[node name="CollisionShape2D2" parent="HitArea" index="0"]
+position = Vector2(0, -55)
+shape = SubResource("CapsuleShape2D_boss_abyss")
+
+[node name="AnimateSprite" type="AnimatedSprite2D" parent="Sprite" index="0"]
+position = Vector2(-22, -98)
+scale = Vector2(0.26, 0.26)
+sprite_frames = SubResource("SpriteFrames_abyss")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="ShieldSprite" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.4, 2, 2.5, 0.8)
+position = Vector2(0, -60)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("7_shield_tex")
+
+[node name="LaserBeamArea" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -12)
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="LaserBeamArea"]
+modulate = Color(3, 0.2, 0.2, 1)
+scale = Vector2(6, 0.2)
+texture = ExtResource("8_laser_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserBeamArea"]
+shape = SubResource("RectangleShape2D_laser_floor")

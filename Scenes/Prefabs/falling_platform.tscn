@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cax42m1k8p7qn"]
+
+[ext_resource type="Script" path="res://Scenes/Prefabs/falling_platform.gd" id="1_fp_gd"]
+[ext_resource type="Texture2D" path="res://Assets/Spritesheet/floating_platform.png" id="2_fp_tex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
+size = Vector2(88, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_top"]
+size = Vector2(80, 8)
+
+[node name="FallingPlatform" type="AnimatableBody2D"]
+collision_layer = 1
+collision_mask = 0
+sync_to_physics = false
+script = ExtResource("1_fp_gd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.9, 0.8, 1)
+texture = ExtResource("2_fp_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_platform")
+one_way_collision = true
+
+[node name="TopArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="TopCollision" type="CollisionShape2D" parent="TopArea"]
+position = Vector2(0, -13)
+shape = SubResource("RectangleShape2D_top")

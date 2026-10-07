@@ -5,6 +5,8 @@ func _ready() -> void:
 	var gm = get_node_or_null("/root/GameManager")
 	if gm:
 		gm.player = %Player if has_node("%Player") else null
+		if has_node("LevelFinishDoor") and "required_keys" in $LevelFinishDoor:
+			gm.required_keys = $LevelFinishDoor.required_keys
 		if gm.has_method("on_level_entered"):
 			gm.on_level_entered(scene_file_path)
 		else:

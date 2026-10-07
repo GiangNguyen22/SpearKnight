@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://c8m37k2map4qn"]
+
+[ext_resource type="Script" path="res://Scenes/Prefabs/trap_laser.gd" id="1_tl"]
+[ext_resource type="Texture2D" path="res://Assets/Spritesheet/laser_bullet.png" id="2_laser_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Textures/CloudTexture.png" id="3_glow_tex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_laser"]
+size = Vector2(180, 24)
+
+[node name="TrapLaser" type="Area2D" groups=["Traps"]]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_tl")
+
+[node name="BeamSprite" type="Sprite2D" parent="."]
+modulate = Color(2.5, 0.4, 0.4, 1)
+scale = Vector2(1.5, 0.2)
+texture = ExtResource("2_laser_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_laser")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 0.2, 0.2, 1)
+energy = 1.8
+texture = ExtResource("3_glow_tex")
+texture_scale = 0.6
+
+[node name="ToggleTimer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true

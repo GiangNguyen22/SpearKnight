@@ -327,7 +327,7 @@ theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
 theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
-text = "MUA (30 Xu)"
+text = "MUA (25 Xu)"
 
 [node name="StatusLabel" type="Label" parent="Panel"]
 layout_mode = 1

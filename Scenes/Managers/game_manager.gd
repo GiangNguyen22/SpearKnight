@@ -35,9 +35,13 @@ var current_level : String = "res://Scenes/Levels/level_01.tscn"
 var unlocked_level : String = "res://Scenes/Levels/level_01.tscn"
 var save_path := "user://game.save"
 var save_player_position = Vector2.ZERO
+var is_processing_death: bool = false
 
 func _ready() -> void:
 	peek_save_metadata()
+	var icon_tex = load("res://Assets/Splash/splash.png")
+	if icon_tex and icon_tex is Texture2D:
+		DisplayServer.set_icon(icon_tex.get_image())
 
 # Adds score (combat, killing enemies, boss)
 func add_score(v=1):
@@ -103,8 +107,8 @@ func complete_level(level_key: String, stars: int, next_scene_path: String = "")
 			unlocked_level = next_scene_path
 	elif next_scene_path.to_lower().contains("congrat"):
 		# Finished game
-		current_level = "res://Scenes/Levels/level_04.tscn"
-		unlocked_level = "res://Scenes/Levels/level_04.tscn"
+		current_level = "res://Scenes/Levels/level_05.tscn"
+		unlocked_level = "res://Scenes/Levels/level_05.tscn"
 	
 	# 3. Clean up level-specific states for the fresh level
 	save_player_position = Vector2.ZERO
@@ -117,6 +121,7 @@ func complete_level(level_key: String, stars: int, next_scene_path: String = "")
 	save_game()
 
 func on_level_entered(scene_path: String) -> void:
+	is_processing_death = false
 	if "level_" in scene_path.to_lower():
 		current_level = scene_path
 		if get_level_number(scene_path) > get_level_number(unlocked_level):
@@ -154,6 +159,7 @@ func load_next_level(next_scene : PackedScene):
 
 func restart():
 	Engine.time_scale = 1.0
+	is_processing_death = false
 	score = 0
 	hp = 100
 	life = 4
@@ -172,12 +178,15 @@ func restart():
 
 
 func damage(val=1):
+	if is_processing_death:
+		return
 	hp = hp - val
-	if hp <=0 :
+	if hp <= 0:
 		death()
+
 func add_hp(val=1):
 	hp = hp + val
-	if hp >max_hp:
+	if hp > max_hp:
 		hp = max_hp
 
 func set_bus_volume(bus_name: String, linear_val: float) -> void:
@@ -197,14 +206,23 @@ func add_life():
 		life += 1
 
 func death():
-	if player != null:
+	if is_processing_death:
+		return
+	is_processing_death = true
+
+	if player != null and is_instance_valid(player):
 		await player.death_tween()
 	life -= 1
 	lives_lost += 1
 	level_lives_lost += 1
 	if life <= 0:
 		_timing_active = false
-		get_tree().change_scene_to_file("res://Scenes/Levels/game_over.tscn")	
+		is_processing_death = false
+		if is_inside_tree():
+			get_tree().change_scene_to_file("res://Scenes/Levels/game_over.tscn")
+	else:
+		hp = max_hp
+		is_processing_death = false	
 
 func save_option():
 	var file = FileAccess.open("user://option.json", FileAccess.WRITE)

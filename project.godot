@@ -22,7 +22,7 @@ run/main_scene="uid://b6tvaxw54wsq0"
 config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/stretch_mode=4
 boot_splash/image="res://Assets/Splash/splash.png"
-config/icon="uid://xeh8sn4tfl0r"
+config/icon="res://Assets/Splash/splash.png"
 boot_splash/minimum_display_time=500
 
 [audio]
@@ -106,3 +106,7 @@ Interact={
 2d_physics/layer_2="player"
 2d_physics/layer_3="enemy"
 2d_physics/layer_4="item"
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true

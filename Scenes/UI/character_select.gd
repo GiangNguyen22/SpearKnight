@@ -17,9 +17,9 @@ extends Control
 var selected_class: String = "knight"
 
 var class_descriptions: Dictionary = {
-	"knight": "[b][color=#ffd700]⚔️ HIỆP SĨ THIẾT GIÁP (KNIGHT)[/color][/b]\n[color=#e0e0e0]• Sinh Mệnh: 100 HP  |  Tốc Độ: 200 px/s[/color]\n[color=#87cefa]• Vũ khí: Ngọn Thương Thần (Sóng Thương Nguyên Tố Lửa/Băng)[/color]\n[color=#cccccc]• Đặc trưng: Phòng thủ vững chắc, khả năng Lướt bóng ma (Dash) và Nảy Tường (Wall Jump) cân bằng.[/color]",
-	"mage": "[b][color=#ba55d3]🔮 PHÙ THỦY HẦM NGỤC (SORCERESS)[/color][/b]\n[color=#e0e0e0]• Sinh Mệnh: 80 HP  |  Tốc Độ: 190 px/s[/color]\n[color=#ff7f50]• Vũ khí: Gậy Phép Ma Thuật (Cầu Lửa Nổ Diện Rộng AOE)[/color]\n[color=#cccccc]• Đặc trưng: Sát thương phép thuật bùng nổ, tạo vụ nổ lan 40px quét sạch bầy quái.[/color]",
-	"archer": "[b][color=#3cb371]🏹 CUNG THỦ TRINH SÁT (RANGER)[/color][/b]\n[color=#e0e0e0]• Sinh Mệnh: 90 HP  |  Tốc Độ: 230 px/s (+15% Thần Tốc)[/color]\n[color=#adff2f]• Vũ khí: Cung Tên Thần Tốc (Bắn Xuyên 2 Kẻ Địch)[/color]\n[color=#cccccc]• Đặc trưng: Nhanh nhẹn nhất hầm ngục, mũi tên xé gió xuyên qua nhiều mục tiêu cùng lúc.[/color]"
+	"knight": "[b][color=#ffd700]⚔️ HIỆP SĨ THIẾT GIÁP (KNIGHT)[/color][/b]\n[color=#e0e0e0]• Sinh Mệnh: 100 HP  |  Tốc Độ: 300 px/s[/color]\n[color=#87cefa]• Vũ khí: Ngọn Thương Thần (Sóng Thương Nguyên Tố Lửa/Băng/Hoàng Kim)[/color]\n[color=#cccccc]• Đặc trưng: Phòng thủ vững chắc, khả năng Lướt bóng ma (Dash) và Nảy Tường (Wall Jump) toàn diện.[/color]",
+	"mage": "[b][color=#ba55d3]🔮 PHÙ THỦY HẦM NGỤC (SORCERESS)[/color][/b]\n[color=#e0e0e0]• Sinh Mệnh: 80 HP  |  Tốc Độ: 280 px/s[/color]\n[color=#ff7f50]• Vũ khí: Gậy Phép Ma Thuật (Cầu Lửa Nổ Diện Rộng AOE)[/color]\n[color=#cccccc]• Đặc trưng: Sát thương phép thuật bùng nổ, tạo vụ nổ lan 45px quét sạch bầy quái.[/color]",
+	"archer": "[b][color=#3cb371]🏹 CUNG THỦ TRINH SÁT (RANGER)[/color][/b]\n[color=#e0e0e0]• Sinh Mệnh: 90 HP  |  Tốc Độ: 345 px/s (+15% Thần Tốc)[/color]\n[color=#adff2f]• Vũ khí: Cung Tên Thần Tốc (Bắn Xuyên 2 Kẻ Địch)[/color]\n[color=#cccccc]• Đặc trưng: Nhanh nhẹn nhất hầm ngục, mũi tên xé gió xuyên qua nhiều mục tiêu cùng lúc.[/color]"
 }
 
 

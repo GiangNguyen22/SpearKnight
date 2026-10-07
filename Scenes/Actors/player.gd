@@ -36,6 +36,7 @@ var spawn_point = Vector2(0,0)
 var is_attacking = false
 var attack_cooldown_timer = 0.0
 var can_damage = true
+var is_dying : bool = false
 var is_slash_active = false
 var facing_direction : int = 1 # 1 = Phải, -1 = Trái
 
@@ -70,6 +71,7 @@ func _ready() -> void:
 	var gm = get_node_or_null("/root/GameManager")
 	if gm and "save_player_position" in gm and gm.save_player_position.x != 0:
 		global_position = gm.save_player_position
+		spawn_point = global_position
 		gm.save_player_position = Vector2.ZERO
 	if player_sprite:
 		if _default_knight_frames == null:
@@ -159,6 +161,9 @@ func apply_class_config() -> void:
 	match cid:
 		"knight":
 			move_speed = 300.0
+			if gm:
+				gm.max_hp = 100
+				gm.hp = min(gm.hp, 100)
 			var b_tscn = load("res://Scenes/Prefabs/bullet.tscn")
 			if b_tscn: bullet_scene = b_tscn
 			if player_sprite:
@@ -173,6 +178,9 @@ func apply_class_config() -> void:
 			if slash_vfx: slash_vfx.modulate = Color(1.8, 1.4, 0.4, 1.0)
 		"mage":
 			move_speed = 280.0
+			if gm:
+				gm.max_hp = 80
+				gm.hp = min(gm.hp, 80)
 			var b_tscn = load("res://Scenes/Prefabs/bullet_mage.tscn") if ResourceLoader.exists("res://Scenes/Prefabs/bullet_mage.tscn") else load("res://Scenes/Prefabs/bullet.tscn")
 			if b_tscn: bullet_scene = b_tscn
 			if player_sprite:
@@ -188,6 +196,9 @@ func apply_class_config() -> void:
 			if slash_vfx: slash_vfx.modulate = Color(2.0, 0.5, 2.2, 1.0)
 		"archer":
 			move_speed = 345.0
+			if gm:
+				gm.max_hp = 90
+				gm.hp = min(gm.hp, 90)
 			var b_tscn = load("res://Scenes/Prefabs/bullet_archer.tscn") if ResourceLoader.exists("res://Scenes/Prefabs/bullet_archer.tscn") else load("res://Scenes/Prefabs/bullet.tscn")
 			if b_tscn: bullet_scene = b_tscn
 			if player_sprite:
@@ -311,7 +322,7 @@ func movement(delta: float):
 			velocity.x = -move_speed
 		elif Input.is_action_pressed("Right"):
 			velocity.x = move_speed
-	if velocity.y > 5000:
+	if velocity.y > 5000 and not is_dying and can_damage:
 		hit_trap.emit()
 	move_and_slide()
 
@@ -413,52 +424,94 @@ func flip_player():
 
 # Tween Animations (không cần sửa, dùng scale/position của node cha)
 func death_tween():
-	play_sfx("death_sfx")
-	death_particles.emitting = true
+	if is_dying:
+		return
+	is_dying = true
+	can_damage = false
 	movement_enabled = false
+	velocity = Vector2.ZERO
+	
+	# Vô hiệu hóa hitbox va chạm trong suốt thời gian chết
+	if has_node("Collision"):
+		$Collision.set_deferred("monitoring", false)
+		$Collision.set_deferred("monitorable", false)
+	collision_layer = 0
+	
+	play_sfx("death_sfx")
+	if death_particles:
+		death_particles.emitting = true
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2.ZERO, 0.15)
-	tween.parallel().tween_property(self, "position", Vector2(position.x,position.y-100), 0.15)
+	tween.parallel().tween_property(self, "position", Vector2(position.x, position.y - 100), 0.15)
 	await tween.finished
+	
+	# Đặt người chơi về điểm hồi sinh an toàn, xóa sạch gia tốc cũ
 	global_position = spawn_point
+	velocity = Vector2.ZERO
 	await get_tree().create_timer(0.3).timeout
+	
+	# Khôi phục va chạm và di chuyển
+	collision_layer = 2
+	if has_node("Collision"):
+		$Collision.set_deferred("monitoring", true)
+		$Collision.set_deferred("monitorable", true)
+		
 	movement_enabled = true
 	play_sfx("respawn_sfx")
-	respawn_tween()
+	await respawn_tween()
+	
+	# Thời gian bất tử khi vừa hồi sinh (1.5s i-frames nhấp nháy mờ chạy song song khi bắt đầu di chuyển)
+	is_dying = false
+	start_respawn_invulnerability(1.5)
 
 func respawn_tween():
 	var tween = create_tween()
-	tween.stop(); tween.play()
-	tween.tween_property(self, "scale", Vector2.ONE, 0.15) 
-	tween.parallel().tween_property(self, "position", spawn_point, 0.15)
+	tween.tween_property(self, "scale", Vector2.ONE, 0.18).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(self, "position", spawn_point, 0.18)
+	await tween.finished
+
+func start_respawn_invulnerability(duration: float = 1.5) -> void:
+	can_damage = false
+	var blink_count: int = int(duration / 0.15)
+	var tween = create_tween()
+	for i in range(blink_count):
+		tween.tween_property(player_node, "modulate:a", 0.35, 0.075)
+		tween.tween_property(player_node, "modulate:a", 1.0, 0.075)
+	await tween.finished
+	if is_instance_valid(player_node):
+		player_node.modulate.a = 1.0
+	can_damage = true
 
 func jump_tween():
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2(0.7, 1.4), 0.1)
-	tween.tween_property(self, "scale", Vector2(1.0,1.0), 0.1)
+	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.1)
 
 func damage_tween():
 	shake(8.0, 0.25)
 	var tween = create_tween() 
 	tween.stop(); tween.play()
 	can_damage = false
-	for i in range(1,10):
-		tween.tween_property(player_node , "modulate", Color.RED, 0.1)
-		tween.tween_property(player_node , "modulate", Color.WHITE, 0.1)
+	for i in range(1, 10):
+		tween.tween_property(player_node, "modulate", Color.RED, 0.1)
+		tween.tween_property(player_node, "modulate", Color.WHITE, 0.1)
 	await tween.finished
-	can_damage = true
+	if not is_dying:
+		can_damage = true
 
 # --------- SIGNALS ---------- #
 func _on_collision_body_entered(body):
+	if is_dying or not can_damage:
+		return
 	if body.is_in_group("Traps"):
 		shake(10.0, 0.3)
 		hit_trap.emit()
-	if !can_damage: return
+		return
 	if body.is_in_group("Enemy") or body is Enemy or body.is_in_group("Boss"):
 		on_hit_by_enemy(body)
 
 func check_enemy_collisions():
-	if not can_damage or not movement_enabled or is_dashing:
+	if is_dying or not can_damage or not movement_enabled or is_dashing:
 		return
 	if has_node("Collision"):
 		var bodies = $Collision.get_overlapping_bodies()

@@ -21,6 +21,6 @@ mono_crash.*.json
 # Scratch workspace folder
 scratch/
 
-# Ignore internal markdown docs except README.md
+# Ignore internal markdown docs except README.md 
 *.md
 !README.md
