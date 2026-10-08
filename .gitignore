@@ -21,6 +21,11 @@ mono_crash.*.json
 # Scratch workspace folder
 scratch/
 
-# Ignore internal markdown docs except README.md 
+# Android build outputs
+*.apk
+*.apk.idsig
+layout_btn.png
+
+# Ignore internal markdown docs except README.md
 *.md
 !README.md

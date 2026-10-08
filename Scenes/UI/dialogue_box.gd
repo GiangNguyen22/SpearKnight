@@ -7,6 +7,8 @@ signal line_finished(index: int)
 @export var type_speed: float = 0.025
 @export var default_knight_portrait: Texture2D
 @export var default_elder_portrait: Texture2D
+@export var default_mage_portrait: Texture2D
+@export var default_archer_portrait: Texture2D
 
 @onready var root_control: Control = $Control
 @onready var dialogue_panel: Panel = $Control/DialoguePanel
@@ -50,6 +52,10 @@ func _ready() -> void:
 		default_knight_portrait = load("res://Assets/UI/portrait_knight.jpg")
 	if default_elder_portrait == null:
 		default_elder_portrait = load("res://Assets/UI/portrait_elder.jpg")
+	if default_mage_portrait == null:
+		default_mage_portrait = load("res://Assets/UI/portrait_mage.jpg")
+	if default_archer_portrait == null:
+		default_archer_portrait = load("res://Assets/UI/portrait_archer.jpg")
 	if root_control:
 		root_control.visible = false
 	if indicator:
@@ -89,6 +95,12 @@ func start_dialogue(new_lines: Array, speaker: String = "Hiệp Sĩ", portrait: 
 	elif speaker.to_lower().contains("trưởng làng") or speaker.to_lower().contains("sử gia") or speaker.to_lower().contains("elder") or speaker.to_lower().contains("già"):
 		if portrait_rect:
 			portrait_rect.texture = default_elder_portrait
+	elif speaker.to_lower().contains("phù thủy") or speaker.to_lower().contains("mage") or speaker.to_lower().contains("sorceress"):
+		if portrait_rect:
+			portrait_rect.texture = default_mage_portrait
+	elif speaker.to_lower().contains("cung thủ") or speaker.to_lower().contains("archer") or speaker.to_lower().contains("ranger"):
+		if portrait_rect:
+			portrait_rect.texture = default_archer_portrait
 	else:
 		if portrait_rect:
 			portrait_rect.texture = default_knight_portrait

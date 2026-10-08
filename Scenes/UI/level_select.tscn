@@ -1,0 +1,497 @@
+[gd_scene format=3 uid="uid://c7levelselect001"]
+
+[ext_resource type="Script" path="res://Scenes/UI/level_select.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Assets/Splash/dungeon_splash_bg.jpg" id="2_bg"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="3_theme"]
+[ext_resource type="Texture2D" path="res://Assets/UI/star_gold.png" id="4_stargold"]
+[ext_resource type="Texture2D" path="res://Assets/UI/star_gray.png" id="5_stargray"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_badge"]
+content_margin_left = 16.0
+content_margin_top = 6.0
+content_margin_right = 16.0
+content_margin_bottom = 6.0
+bg_color = Color(0.12, 0.08, 0.2, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.95, 0.8, 0.25, 0.95)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+bg_color = Color(0.08, 0.06, 0.14, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.72, 0.32, 0.85)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.4)
+shadow_size = 6
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_theme")
+script = ExtResource("1_script")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Scrim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03, 0.04, 0.08, 0.82)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="Control/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HeaderBox" type="HBoxContainer" parent="Control/Margin/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="Control/Margin/VBox/HeaderBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.88, 0.35, 1)
+theme_override_colors/font_outline_color = Color(0.08, 0.04, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 28
+text = "🏰 CHỌN MÀN CHƠI (LEVEL SELECT) 🏰"
+vertical_alignment = 1
+
+[node name="TotalStarsBadge" type="PanelContainer" parent="Control/Margin/VBox/HeaderBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_badge")
+
+[node name="TotalStarsLabel" type="Label" parent="Control/Margin/VBox/HeaderBox/TotalStarsBadge"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.3, 1)
+theme_override_font_sizes/font_size = 18
+text = "⭐ TỔNG SAO: 0 / 15"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="Control/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.85, 1)
+theme_override_font_sizes/font_size = 14
+text = "Khám phá các tầng hầm ngục, thu thập đủ 3 sao mỗi màn để khẳng định danh hiệu Anh Hùng Hoàng Gia!"
+horizontal_alignment = 1
+
+[node name="ScrollArea" type="ScrollContainer" parent="Control/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="CenterArea" type="CenterContainer" parent="Control/Margin/VBox/ScrollArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RowsContainer" type="VBoxContainer" parent="Control/Margin/VBox/ScrollArea/CenterArea"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Row1" type="HBoxContainer" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="CardLevel1" type="PanelContainer" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1"]
+custom_minimum_size = Vector2(210, 180)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="VBox" type="VBoxContainer" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel1"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel1/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.35, 1)
+theme_override_font_sizes/font_size = 20
+text = "TẦNG 01"
+horizontal_alignment = 1
+
+[node name="SubLabel" type="Label" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel1/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Cổng Hầm Ngục"
+horizontal_alignment = 1
+
+[node name="StarsBox" type="HBoxContainer" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel1/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Star1" type="TextureRect" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel1/VBox/StarsBox"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("4_stargold")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel1/VBox/StarsBox"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("4_stargold")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel1/VBox/StarsBox"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("4_stargold")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatusLabel" type="Label" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel1/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "⭐ 0 / 3 SAO"
+horizontal_alignment = 1
+
+[node name="BtnPlay" type="Button" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel1/VBox"]
+custom_minimum_size = Vector2(120, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Vào Chơi"
+
+[node name="CardLevel2" type="PanelContainer" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1"]
+custom_minimum_size = Vector2(210, 180)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="VBox" type="VBoxContainer" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel2"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel2/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.35, 1)
+theme_override_font_sizes/font_size = 20
+text = "TẦNG 02"
+horizontal_alignment = 1
+
+[node name="SubLabel" type="Label" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel2/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Rừng Nấm Độc"
+horizontal_alignment = 1
+
+[node name="StarsBox" type="HBoxContainer" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel2/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Star1" type="TextureRect" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel2/VBox/StarsBox"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("5_stargray")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel2/VBox/StarsBox"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("5_stargray")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel2/VBox/StarsBox"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("5_stargray")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatusLabel" type="Label" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel2/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "⭐ 0 / 3 SAO"
+horizontal_alignment = 1
+
+[node name="BtnPlay" type="Button" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel2/VBox"]
+custom_minimum_size = Vector2(120, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Vào Chơi"
+
+[node name="CardLevel3" type="PanelContainer" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1"]
+custom_minimum_size = Vector2(210, 180)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="VBox" type="VBoxContainer" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel3"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel3/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.35, 1)
+theme_override_font_sizes/font_size = 20
+text = "TẦNG 03"
+horizontal_alignment = 1
+
+[node name="SubLabel" type="Label" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel3/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Vực Thẳm Lưỡi Cưa"
+horizontal_alignment = 1
+
+[node name="StarsBox" type="HBoxContainer" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel3/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Star1" type="TextureRect" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel3/VBox/StarsBox"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("5_stargray")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel3/VBox/StarsBox"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("5_stargray")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel3/VBox/StarsBox"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("5_stargray")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatusLabel" type="Label" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel3/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "⭐ 0 / 3 SAO"
+horizontal_alignment = 1
+
+[node name="BtnPlay" type="Button" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row1/CardLevel3/VBox"]
+custom_minimum_size = Vector2(120, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Vào Chơi"
+
+[node name="Row2" type="HBoxContainer" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="CardLevel4" type="PanelContainer" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2"]
+custom_minimum_size = Vector2(210, 180)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="VBox" type="VBoxContainer" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2/CardLevel4"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2/CardLevel4/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.35, 1)
+theme_override_font_sizes/font_size = 20
+text = "TẦNG 04"
+horizontal_alignment = 1
+
+[node name="SubLabel" type="Label" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2/CardLevel4/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Động Troll Chúa"
+horizontal_alignment = 1
+
+[node name="StarsBox" type="HBoxContainer" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2/CardLevel4/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Star1" type="TextureRect" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2/CardLevel4/VBox/StarsBox"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("5_stargray")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2/CardLevel4/VBox/StarsBox"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("5_stargray")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2/CardLevel4/VBox/StarsBox"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("5_stargray")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatusLabel" type="Label" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2/CardLevel4/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "⭐ 0 / 3 SAO"
+horizontal_alignment = 1
+
+[node name="BtnPlay" type="Button" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2/CardLevel4/VBox"]
+custom_minimum_size = Vector2(120, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Vào Chơi"
+
+[node name="CardLevel5" type="PanelContainer" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2"]
+custom_minimum_size = Vector2(210, 180)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="VBox" type="VBoxContainer" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2/CardLevel5"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2/CardLevel5/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.35, 1)
+theme_override_font_sizes/font_size = 20
+text = "TẦNG 05"
+horizontal_alignment = 1
+
+[node name="SubLabel" type="Label" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2/CardLevel5/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "Sào Huyệt Abyss"
+horizontal_alignment = 1
+
+[node name="StarsBox" type="HBoxContainer" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2/CardLevel5/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Star1" type="TextureRect" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2/CardLevel5/VBox/StarsBox"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("5_stargray")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2/CardLevel5/VBox/StarsBox"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("5_stargray")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2/CardLevel5/VBox/StarsBox"]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+texture = ExtResource("5_stargray")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatusLabel" type="Label" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2/CardLevel5/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "⭐ 0 / 3 SAO"
+horizontal_alignment = 1
+
+[node name="BtnPlay" type="Button" parent="Control/Margin/VBox/ScrollArea/CenterArea/RowsContainer/Row2/CardLevel5/VBox"]
+custom_minimum_size = Vector2(120, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Vào Chơi"
+
+[node name="BottomBox" type="HBoxContainer" parent="Control/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="BtnBack" type="Button" parent="Control/Margin/VBox/BottomBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 44)
+layout_mode = 2
+text = "⬅️ Quay Lại Menu"
+
+[node name="BtnReset" type="Button" parent="Control/Margin/VBox/BottomBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 44)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.45, 0.45, 1)
+text = "🔄 Đặt Lại Tiến Độ"
+
+[node name="ConfirmDialog" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+title = "Xác nhận đặt lại tiến độ"
+initial_position = 2
+size = Vector2i(440, 150)
+dialog_text = "Bạn có chắc muốn xóa toàn bộ số sao và khóa lại các màn chơi từ đầu không?"
+dialog_autowrap = true
+ok_button_text = "Đồng ý Đặt Lại"
+cancel_button_text = "Hủy"

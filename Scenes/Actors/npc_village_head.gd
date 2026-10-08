@@ -47,6 +47,17 @@ func _process(delta: float) -> void:
 		quest_marker.position.y = -95.0 + sin(_bob_time) * 4.0
 
 
+func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int) -> void:
+	if not is_player_near:
+		return
+	var dm = get_node_or_null("/root/DialogueManager")
+	if dm and dm.has_method("is_dialogue_active") and dm.is_dialogue_active():
+		return
+	if (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT) or (event is InputEventScreenTouch and event.pressed):
+		interact()
+		get_viewport().set_input_as_handled()
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_player_near:
 		return
@@ -65,13 +76,34 @@ func interact() -> void:
 	if dm and dm.has_method("is_dialogue_active") and dm.is_dialogue_active():
 		return
 	
+	var gm = get_node_or_null("/root/GameManager")
+	var char_id: String = gm.selected_character_id if gm and "selected_character_id" in gm else "knight"
+	
+	var char_greeting := "dũng sĩ Hiệp Sĩ"
+	var char_weapon_advice := "Hãy dùng [color=cyan]Chiến Thương[/color] dũng mãnh và những đòn cận chiến liên hoàn để tiêu diệt quái vật."
+	var char_title := "Hiệp Sĩ"
+	
+	match char_id:
+		"mage":
+			char_greeting = "nhà pháp thuật Phù Thủy"
+			char_weapon_advice = "Hãy dùng [color=magenta]Ma Pháp Nguyên Tố[/color] uy lực cùng thuật [color=magenta]Tốc Biến[/color] huyền bí để thanh trừng quái vật."
+			char_title = "Phù Thủy"
+		"archer":
+			char_greeting = "thiện xạ Cung Thủ"
+			char_weapon_advice = "Hãy dùng [color=green]Cung Tên Thần Tốc[/color] bắn xuyên bầy quái vật và giữ cự ly an toàn."
+			char_title = "Cung Thủ"
+		_:
+			char_greeting = "dũng sĩ Hiệp Sĩ"
+			char_weapon_advice = "Hãy dùng [color=cyan]Chiến Thương[/color] dũng mãnh và những đòn cận chiến liên hoàn để tiêu diệt quái vật."
+			char_title = "Hiệp Sĩ"
+	
 	var lines: Array[String] = []
 	if not has_talked_once:
 		lines = [
-			"Chào dũng sĩ Hiệp Sĩ! Ta là Trưởng Làng kiêm Sử Gia của vương quốc.",
+			"Chào %s! Ta là Trưởng Làng kiêm Sử Gia của vương quốc." % char_greeting,
 			"Hầm Ngục Hắc Ám phía trước vô cùng hiểm ác, tràn ngập quái Nấm độc và quái Orc khát máu.",
 			"Cánh cổng thần thánh đã bị phong ấn. Hãy tìm đủ [color=gold]3 Chìa Khóa Cổ[/color] được cất giấu để mở cổng hầm ngục!",
-			"Hãy dùng [color=cyan]Chiến Thương[/color] của ngươi tiêu diệt quái vật. Vương quốc trông cậy cả vào ngươi!"
+			"%s Vương quốc trông cậy cả vào ngươi!" % char_weapon_advice
 		]
 		has_talked_once = true
 		if quest_marker:
@@ -80,7 +112,7 @@ func interact() -> void:
 		quest_given.emit()
 	else:
 		lines = [
-			"Hãy cẩn trọng từng bước đi, Hiệp Sĩ!",
+			"Hãy cẩn trọng từng bước đi, %s!" % char_title,
 			"Thu thập đủ [color=gold]3 Chìa Khóa Cổ[/color] rồi tiến về cánh cổng phong ấn ở cuối hầm ngục nhé!"
 		]
 	

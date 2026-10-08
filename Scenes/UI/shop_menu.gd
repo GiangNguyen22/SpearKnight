@@ -35,7 +35,7 @@ func open_shop() -> void:
 	visible = true
 	get_tree().paused = true
 	update_ui()
-	show_status("Chào mừng đến Cửa Hàng Hiệp Sĩ!")
+	show_status("Chào mừng đến Cửa Hàng Dũng Sĩ!")
 
 func close_shop() -> void:
 	visible = false
@@ -110,7 +110,7 @@ func _on_btn_speed_pressed() -> void:
 		else:
 			gm.set("spear_wave_speed_mult", 1.2)
 		play_buy_sfx()
-		show_status("Đã tăng +20% Tốc độ Sóng Thương!")
+		show_status("Đã tăng +20% Tốc độ Đạn / Sóng thương!")
 		update_ui()
 	else:
 		show_status("Không đủ xu! Cần %d xu." % cost, true)

@@ -33,6 +33,7 @@ var player :Player = null
 var selected_character_id: String = "knight"
 var current_level : String = "res://Scenes/Levels/level_01.tscn"
 var unlocked_level : String = "res://Scenes/Levels/level_01.tscn"
+var selected_level_to_play: String = ""
 var save_path := "user://game.save"
 var save_player_position = Vector2.ZERO
 var is_processing_death: bool = false
@@ -93,6 +94,23 @@ func get_continue_level_display_name() -> String:
 	var target = get_target_continue_level()
 	var num = get_level_number(target)
 	return "Tầng %d" % num
+
+func get_total_stars() -> int:
+	var total := 0
+	for k in level_stars:
+		total += int(level_stars[k])
+	return total
+
+func is_level_unlocked(level_idx: int) -> bool:
+	if level_idx <= 1:
+		return true
+	var highest_unlocked = get_level_number(unlocked_level)
+	if highest_unlocked >= level_idx:
+		return true
+	var prev_key = "level_0%d" % (level_idx - 1)
+	if level_stars.has(prev_key) and int(level_stars[prev_key]) > 0:
+		return true
+	return false
 
 func complete_level(level_key: String, stars: int, next_scene_path: String = "") -> void:
 	# 1. Update best star count
@@ -171,10 +189,26 @@ func restart():
 	lives_lost = 0
 	_timing_active = false
 	current_level = "res://Scenes/Levels/level_01.tscn"
-	unlocked_level = "res://Scenes/Levels/level_01.tscn"
+	# Giữ nguyên unlocked_level và level_stars để không mất tiến độ chọn màn kiểu Angry Birds
+	if unlocked_level == "":
+		unlocked_level = "res://Scenes/Levels/level_01.tscn"
 	keys_updated.emit(keys_collected, required_keys)
 	save_game()
 	get_tree().change_scene_to_file("res://Scenes/Levels/level_01.tscn")
+
+## Xóa toàn bộ tiến độ chơi và trả về trạng thái ban đầu khi người chơi muốn đặt lại từ đầu
+func reset_all_save_data() -> void:
+	level_stars.clear()
+	current_level = "res://Scenes/Levels/level_01.tscn"
+	unlocked_level = "res://Scenes/Levels/level_01.tscn"
+	score = 0
+	hp = 100
+	life = 4
+	save_player_position = Vector2.ZERO
+	if FileAccess.file_exists(save_path):
+		var dir = DirAccess.open("user://")
+		if dir:
+			dir.remove("game.save")
 
 
 func damage(val=1):

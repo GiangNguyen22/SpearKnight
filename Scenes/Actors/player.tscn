@@ -55,7 +55,7 @@
 [ext_resource type="Texture2D" path="res://Assets/Spritesheet/bow.png" id="w_bow"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_melee"]
-size = Vector2(95, 55)
+size = Vector2(115, 65)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n4sts"]
 radius = 20.0
@@ -299,12 +299,14 @@ animation = &"Idle"
 autoplay = "Idle"
 
 [node name="BulletMarker" type="Marker2D" parent="student" unique_id=511055809]
-position = Vector2(76, -55)
+position = Vector2(20, -42)
 
 [node name="MeleeArea" type="Area2D" parent="student" unique_id=987123456 groups=["MeleeAttack"]]
-position = Vector2(65, -45)
+position = Vector2(45, -45)
 collision_layer = 2
 collision_mask = 4
+monitoring = false
+monitorable = false
 
 [node name="MeleeCollision" type="CollisionShape2D" parent="student/MeleeArea" unique_id=987123457]
 shape = SubResource("RectangleShape2D_melee")
@@ -340,8 +342,5 @@ drag_top_margin = 0.6
 drag_bottom_margin = 0.4
 editor_draw_limits = true
 editor_draw_drag_margin = true
-
-[node name="BulletMarker" type="Marker2D" parent="." unique_id=511055810]
-position = Vector2(76, -55)
 
 [connection signal="body_entered" from="Collision" to="." method="_on_collision_body_entered"]

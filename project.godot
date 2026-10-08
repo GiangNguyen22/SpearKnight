@@ -38,8 +38,11 @@ DialogueManager="*res://Scenes/UI/dialogue_box.tscn"
 
 [display]
 
-window/size/mode=1
+window/size/viewport_width=1152
+window/size/viewport_height=648
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation="sensor_landscape"
 
 [dotnet]
 

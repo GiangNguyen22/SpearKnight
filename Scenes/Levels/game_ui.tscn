@@ -17,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://d1x4m7v9b2k8s" path="res://Assets/UI/icon_shop.png" id="15_shop_ico"]
 [ext_resource type="PackedScene" uid="uid://d3x8y7w1q9k4n" path="res://Scenes/UI/shop_menu.tscn" id="16_shop"]
 [ext_resource type="PackedScene" uid="uid://b8y9w4m1q2r3s" path="res://Scenes/UI/pause_menu.tscn" id="17_pause"]
+[ext_resource type="Texture2D" path="res://Assets/UI/icon_sword.png" id="18_sword"]
+[ext_resource type="Texture2D" path="res://Assets/UI/icon_chat.png" id="19_chat"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_circle"]
 bg_color = Color(0.047058824, 0.08627451, 0.13725491, 0.82)
@@ -53,6 +55,150 @@ corner_radius_top_left = 24
 corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_rect"]
+bg_color = Color(0.04, 0.08, 0.16, 0.82)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.2, 0.8, 1.0, 0.85)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_rect_pressed"]
+bg_color = Color(0.18, 0.55, 0.85, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1.0, 1.0, 1.0, 1.0)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_jump"]
+bg_color = Color(0.04, 0.09, 0.18, 0.88)
+border_width_left = 3.5
+border_width_top = 3.5
+border_width_right = 3.5
+border_width_bottom = 3.5
+border_color = Color(0.25, 0.82, 1.0, 0.95)
+corner_radius_top_left = 58
+corner_radius_top_right = 58
+corner_radius_bottom_right = 58
+corner_radius_bottom_left = 58
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_jump_pressed"]
+bg_color = Color(0.2, 0.65, 0.95, 0.95)
+border_width_left = 3.5
+border_width_top = 3.5
+border_width_right = 3.5
+border_width_bottom = 3.5
+border_color = Color(1.0, 1.0, 1.0, 1.0)
+corner_radius_top_left = 58
+corner_radius_top_right = 58
+corner_radius_bottom_right = 58
+corner_radius_bottom_left = 58
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_attack"]
+bg_color = Color(0.14, 0.08, 0.02, 0.88)
+border_width_left = 3.5
+border_width_top = 3.5
+border_width_right = 3.5
+border_width_bottom = 3.5
+border_color = Color(1.0, 0.78, 0.15, 0.95)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_attack_pressed"]
+bg_color = Color(0.95, 0.65, 0.1, 0.95)
+border_width_left = 3.5
+border_width_top = 3.5
+border_width_right = 3.5
+border_width_bottom = 3.5
+border_color = Color(1.0, 1.0, 1.0, 1.0)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_dash"]
+bg_color = Color(0.02, 0.11, 0.11, 0.88)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.2, 0.95, 0.82, 0.95)
+corner_radius_top_left = 42
+corner_radius_top_right = 42
+corner_radius_bottom_right = 42
+corner_radius_bottom_left = 42
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_dash_pressed"]
+bg_color = Color(0.15, 0.8, 0.7, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1.0, 1.0, 1.0, 1.0)
+corner_radius_top_left = 42
+corner_radius_top_right = 42
+corner_radius_bottom_right = 42
+corner_radius_bottom_left = 42
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_skill"]
+bg_color = Color(0.12, 0.04, 0.18, 0.88)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.85, 0.45, 1.0, 0.95)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_skill_pressed"]
+bg_color = Color(0.75, 0.35, 0.95, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1.0, 1.0, 1.0, 1.0)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_element"]
+bg_color = Color(0.1, 0.07, 0.02, 0.85)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1.0, 0.6, 0.2, 0.9)
+corner_radius_top_left = 36
+corner_radius_top_right = 36
+corner_radius_bottom_right = 36
+corner_radius_bottom_left = 36
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_element_pressed"]
+bg_color = Color(0.9, 0.5, 0.1, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1.0, 1.0, 1.0, 1.0)
+corner_radius_top_left = 36
+corner_radius_top_right = 36
+corner_radius_bottom_right = 36
+corner_radius_bottom_left = 36
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boss_fill"]
 bg_color = Color(0.88235295, 0.2, 0.15686275, 1)
@@ -201,12 +347,39 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -162.0
+offset_left = -214.0
 offset_top = 10.0
 offset_right = -16.0
 offset_bottom = 54.0
 grow_horizontal = 0
 theme_override_constants/separation = 8
+
+[node name="BtnShop" type="Button" parent="GameUI/TopBar/TopRightWidget"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_circle")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_circle_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_circle_pressed")
+
+[node name="ShopIcon" type="TextureRect" parent="GameUI/TopBar/TopRightWidget/BtnShop"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_shop_ico")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="BtnMusic" type="Button" parent="GameUI/TopBar/TopRightWidget"]
 unique_name_in_owner = true
@@ -334,26 +507,26 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -110.0
+offset_top = -330.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 
 [node name="btnLeft" type="Button" parent="GameUI/BottomControls"]
-custom_minimum_size = Vector2(56, 56)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = -80.0
-offset_right = 80.0
-offset_bottom = -24.0
+offset_left = 36.0
+offset_top = -150.0
+offset_right = 132.0
+offset_bottom = -54.0
 grow_vertical = 0
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxFlat_btn_circle")
-theme_override_styles/hover = SubResource("StyleBoxFlat_btn_circle_hover")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_circle_pressed")
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_rect")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_rect")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_rect_pressed")
 
 [node name="Icon" type="TextureRect" parent="GameUI/BottomControls/btnLeft"]
 layout_mode = 1
@@ -362,10 +535,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
+offset_left = -26.0
+offset_top = -26.0
+offset_right = 26.0
+offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -373,55 +546,21 @@ texture = ExtResource("9_left")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="btnUp" type="Button" parent="GameUI/BottomControls"]
-custom_minimum_size = Vector2(56, 56)
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 92.0
-offset_top = -94.0
-offset_right = 148.0
-offset_bottom = -38.0
-grow_vertical = 0
-focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxFlat_btn_circle")
-theme_override_styles/hover = SubResource("StyleBoxFlat_btn_circle_hover")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_circle_pressed")
-
-[node name="Icon" type="TextureRect" parent="GameUI/BottomControls/btnUp"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("10_up")
-expand_mode = 1
-stretch_mode = 5
-
 [node name="btnRight" type="Button" parent="GameUI/BottomControls"]
-custom_minimum_size = Vector2(56, 56)
+custom_minimum_size = Vector2(96, 96)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 160.0
-offset_top = -80.0
-offset_right = 216.0
-offset_bottom = -24.0
+offset_left = 168.0
+offset_top = -150.0
+offset_right = 264.0
+offset_bottom = -54.0
 grow_vertical = 0
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxFlat_btn_circle")
-theme_override_styles/hover = SubResource("StyleBoxFlat_btn_circle_hover")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_circle_pressed")
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_rect")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_rect")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_rect_pressed")
 
 [node name="Icon" type="TextureRect" parent="GameUI/BottomControls/btnRight"]
 layout_mode = 1
@@ -430,10 +569,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
+offset_left = -26.0
+offset_top = -26.0
+offset_right = 26.0
+offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -441,98 +580,61 @@ texture = ExtResource("11_right")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="btnShop" type="Button" parent="GameUI/BottomControls"]
-custom_minimum_size = Vector2(52, 52)
+[node name="btnUp" type="Button" parent="GameUI/BottomControls"]
+custom_minimum_size = Vector2(116, 116)
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -282.0
-offset_top = -78.0
-offset_right = -230.0
-offset_bottom = -26.0
+offset_left = -280.0
+offset_top = -170.0
+offset_right = -164.0
+offset_bottom = -54.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxFlat_btn_circle")
-theme_override_styles/hover = SubResource("StyleBoxFlat_btn_circle_hover")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_circle_pressed")
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_jump")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_jump")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_jump_pressed")
 
-[node name="Icon" type="TextureRect" parent="GameUI/BottomControls/btnShop"]
+[node name="Icon" type="TextureRect" parent="GameUI/BottomControls/btnUp"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -14.0
-offset_top = -14.0
-offset_right = 14.0
-offset_bottom = 14.0
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 28.0
+offset_bottom = 28.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("15_shop_ico")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="btnElement" type="Button" parent="GameUI/BottomControls"]
-custom_minimum_size = Vector2(52, 52)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -218.0
-offset_top = -78.0
-offset_right = -166.0
-offset_bottom = -26.0
-grow_horizontal = 0
-grow_vertical = 0
-focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxFlat_btn_circle")
-theme_override_styles/hover = SubResource("StyleBoxFlat_btn_circle_hover")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_circle_pressed")
-
-[node name="Icon" type="TextureRect" parent="GameUI/BottomControls/btnElement"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -14.0
-offset_top = -14.0
-offset_right = 14.0
-offset_bottom = 14.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("14_element")
+texture = ExtResource("10_up")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="btnDash" type="Button" parent="GameUI/BottomControls"]
-custom_minimum_size = Vector2(54, 54)
+custom_minimum_size = Vector2(84, 84)
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -154.0
-offset_top = -80.0
-offset_right = -100.0
-offset_bottom = -26.0
+offset_left = -108.0
+offset_top = -146.0
+offset_right = -24.0
+offset_bottom = -62.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxFlat_btn_circle")
-theme_override_styles/hover = SubResource("StyleBoxFlat_btn_circle_hover")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_circle_pressed")
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_dash")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_dash")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_dash_pressed")
 
 [node name="Icon" type="TextureRect" parent="GameUI/BottomControls/btnDash"]
 layout_mode = 1
@@ -541,10 +643,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -15.0
-offset_top = -15.0
-offset_right = 15.0
-offset_bottom = 15.0
+offset_left = -22.0
+offset_top = -22.0
+offset_right = 22.0
+offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -553,25 +655,62 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="btnShoot" type="Button" parent="GameUI/BottomControls"]
-custom_minimum_size = Vector2(66, 66)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -86.0
-offset_top = -86.0
-offset_right = -20.0
-offset_bottom = -20.0
+offset_left = -312.0
+offset_top = -296.0
+offset_right = -212.0
+offset_bottom = -196.0
 grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
-theme_override_styles/normal = SubResource("StyleBoxFlat_btn_circle")
-theme_override_styles/hover = SubResource("StyleBoxFlat_btn_circle_hover")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_circle_pressed")
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_attack")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_attack")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_attack_pressed")
 
 [node name="Icon" type="TextureRect" parent="GameUI/BottomControls/btnShoot"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -26.0
+offset_right = 26.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("18_sword")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="btnElement" type="Button" parent="GameUI/BottomControls"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -104.0
+offset_top = -246.0
+offset_right = -32.0
+offset_bottom = -174.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_element")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_element")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_element_pressed")
+
+[node name="Icon" type="TextureRect" parent="GameUI/BottomControls/btnElement"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -585,7 +724,7 @@ offset_bottom = 19.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("12_spear")
+texture = ExtResource("14_element")
 expand_mode = 1
 stretch_mode = 5
 
@@ -619,15 +758,15 @@ visible = false
 [node name="PauseMenu" parent="." instance=ExtResource("17_pause")]
 visible = false
 
+[connection signal="pressed" from="GameUI/TopBar/TopRightWidget/BtnShop" to="." method="_on_btn_shop_pressed"]
 [connection signal="button_down" from="GameUI/BottomControls/btnLeft" to="." method="_on_btn_left_pressed"]
 [connection signal="button_up" from="GameUI/BottomControls/btnLeft" to="." method="_on_btn_left_released"]
-[connection signal="button_down" from="GameUI/BottomControls/btnUp" to="." method="_on_btn_up_pressed"]
-[connection signal="button_up" from="GameUI/BottomControls/btnUp" to="." method="_on_btn_up_released"]
 [connection signal="button_down" from="GameUI/BottomControls/btnRight" to="." method="_on_btn_right_pressed"]
 [connection signal="button_up" from="GameUI/BottomControls/btnRight" to="." method="_on_btn_right_released"]
-[connection signal="pressed" from="GameUI/BottomControls/btnShop" to="." method="_on_btn_shop_pressed"]
-[connection signal="pressed" from="GameUI/BottomControls/btnElement" to="." method="_on_btn_element_pressed"]
+[connection signal="button_down" from="GameUI/BottomControls/btnUp" to="." method="_on_btn_up_pressed"]
+[connection signal="button_up" from="GameUI/BottomControls/btnUp" to="." method="_on_btn_up_released"]
 [connection signal="button_down" from="GameUI/BottomControls/btnDash" to="." method="_on_btn_dash_button_down"]
 [connection signal="button_up" from="GameUI/BottomControls/btnDash" to="." method="_on_btn_dash_button_up"]
 [connection signal="button_down" from="GameUI/BottomControls/btnShoot" to="." method="_on_btn_shoot_button_down"]
 [connection signal="button_up" from="GameUI/BottomControls/btnShoot" to="." method="_on_btn_shoot_button_up"]
+[connection signal="pressed" from="GameUI/BottomControls/btnElement" to="." method="_on_btn_element_pressed"]
