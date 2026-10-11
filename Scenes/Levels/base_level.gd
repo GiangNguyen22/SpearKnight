@@ -37,10 +37,24 @@ func _ready() -> void:
 		await get_tree().create_timer(0.4).timeout
 		var dm = get_node_or_null("/root/DialogueManager")
 		if dm and dm.has_method("start_dialogue"):
+			var char_id: String = gm.selected_character_id if gm and "selected_character_id" in gm else "knight"
+			var speaker_title := "Hiệp Sĩ"
+			var monologue_1 := "Ta đã đặt chân vào Tầng 1 của Hầm Ngục Hắc Ám..."
+			match char_id:
+				"mage":
+					speaker_title = "Phù Thủy"
+					monologue_1 = "Nguồn ma lực hắc ám đang bao trùm lấy Tầng 1 của Hầm Ngục..."
+				"archer":
+					speaker_title = "Cung Thủ"
+					monologue_1 = "Cảm giác nguy hiểm đang rình rập khắp Tầng 1 của Hầm Ngục Hắc Ám..."
+				_:
+					speaker_title = "Hiệp Sĩ"
+					monologue_1 = "Ta đã đặt chân vào Tầng 1 của Hầm Ngục Hắc Ám..."
+			
 			dm.start_dialogue([
-				"Ta đã đặt chân vào Tầng 1 của Hầm Ngục Hắc Ám...",
+				monologue_1,
 				"Kìa, Trưởng Làng đang đứng phía trước! Ta nên tới gặp ông ấy xem tình hình thế nào."
-			], "Hiệp Sĩ")
+			], speaker_title)
 
 func _on_player_hit_enemy() -> void:
 	var gm = get_node_or_null("/root/GameManager")

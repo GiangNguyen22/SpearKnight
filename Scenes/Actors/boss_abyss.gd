@@ -342,6 +342,10 @@ func take_damage(amount: float, knockback_dir: Vector2 = Vector2.RIGHT) -> void:
 
 func _on_hit_area_body_entered(body: Node2D) -> void:
 	if alive and body.is_in_group("Bullet"):
+		if body.has_method("explode_aoe"):
+			body.explode_aoe()
+			body.queue_free()
+			return
 		var kdir = Vector2.RIGHT if body.position.x <= position.x else Vector2.LEFT
 		take_damage(40.0, kdir)
 		body.queue_free()

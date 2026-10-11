@@ -154,15 +154,19 @@ func _on_btn_continue_pressed() -> void:
 		gm.load_game()
 
 
+func _on_btn_level_select_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/UI/level_select.tscn")
+
+
 func _on_btn_story_pressed() -> void:
 	var dm = get_node_or_null("/root/DialogueManager")
 	if dm and dm.has_method("start_dialogue"):
 		dm.start_dialogue([
-			"Vương quốc từng là miền đất thanh bình được hộ trì bởi ngọn Chiến Thương Thần Thánh.",
+			"Vương quốc từng là miền đất thanh bình được bảo hộ bởi Cổ Vật Thần Thánh và nguồn Năng Lượng Nguyên Tố.",
 			"Một ngày nọ, phong ấn cổ xưa vỡ vụn. Hầm Ngục Hắc Ám trỗi dậy cùng bầy quái vật Orc và Quái Nấm khổng lồ.",
 			"Báu vật và các Chìa Khóa Cổ bị phân tán khắp các tầng hầm ngục u tối, phong tỏa cánh cổng qua màn.",
-			"Là Hiệp Sĩ Thiết Giáp tiên phong của Iron Squad, bạn gánh vác sứ mệnh tiến sâu vào sào huyệt hầm ngục...",
-			"Hãy thu thập đủ chìa khóa, thanh trừng quái thú và đánh bại Chúa Tể Hầm Ngục để cứu rỗi vương quốc!"
+			"Là những dũng sĩ tinh anh được vương quốc tuyển chọn (Hiệp Sĩ Quả Cảm, Phù Thủy Uyên Bác, Cung Thủ Thiện Xạ), bạn gánh vác sứ mệnh tiến sâu vào sào huyệt hầm ngục...",
+			"Hãy vận dụng vũ khí, làm chủ các nguyên tố (Lửa, Băng, Quang Ma Pháp), thu thập đủ chìa khóa và đánh bại Chúa Tể Hầm Ngục để cứu rỗi vương quốc!"
 		], "Sử Gia Hoàng Gia")
 
 

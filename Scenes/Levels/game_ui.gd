@@ -203,5 +203,9 @@ func _on_btn_element_pressed() -> void:
 	Input.action_press("SwitchElement")
 	Input.action_release("SwitchElement")
 
+func _on_btn_interact_pressed() -> void:
+	Input.action_press("Interact")
+	Input.action_release("Interact")
+
 func _on_btn_shop_pressed() -> void:
 	toggle_shop()

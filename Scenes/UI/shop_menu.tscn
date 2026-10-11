@@ -126,7 +126,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 26
-text = "🛒 CỬA HÀNG NÂNG CẤP HIỆP SĨ"
+text = "🛒 CỬA HÀNG NÂNG CẤP CHIẾN BINH"
 horizontal_alignment = 1
 
 [node name="CoinLabel" type="Label" parent="Panel"]
@@ -267,13 +267,13 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.35, 0.85, 1, 1)
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 16
-text = "⚡ Tốc Độ Thương (+20%)"
+text = "⚡ Tốc Độ Tấn Công (+20%)"
 
 [node name="Desc" type="Label" parent="Panel/GridContainer/Card3/Margin/VBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
 theme_override_font_sizes/font_size = 12
-text = "Phóng Sóng Thương bay nhanh hơn."
+text = "Tăng tốc độ bay của Đạn phép, Tên & Sóng thương."
 
 [node name="BtnSpeed" type="Button" parent="Panel/GridContainer/Card3/Margin/VBox"]
 unique_name_in_owner = true
@@ -344,7 +344,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 17
-text = "Chào mừng đến Cửa Hàng Hiệp Sĩ!"
+text = "Chào mừng đến Cửa Hàng Dũng Sĩ!"
 horizontal_alignment = 1
 
 [node name="BtnClose" type="Button" parent="Panel"]
