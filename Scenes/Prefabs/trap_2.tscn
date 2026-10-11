@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://bn7p1ettcrj43" path="res://Assets/Spritesheet/spear.png" id="1_qddpi"]
 [ext_resource type="Texture2D" uid="uid://jaegp53ccc7w" path="res://Assets/Spritesheet/platformPack_tilesheet.png" id="1_qp3at"]
-[ext_resource type="Texture2D" uid="uid://dia1dp34sme5l" path="res://Assets/Spritesheet/light_w.png" id="3_light_tex"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rf4eo"]
 radius = 27.33693
@@ -87,8 +86,8 @@ position = Vector2(-17.38456, 61.203415)
 shape = SubResource("CircleShape2D_rf4eo")
 
 [node name="PlatformPackTilesheet" type="Sprite2D" parent="Center/StaticBody2D/CollisionShape2D" unique_id=1226813019]
-position = Vector2(1.4558879, -0.8091358)
 modulate = Color(1.15, 1.15, 1.18, 1)
+position = Vector2(1.4558879, -0.8091358)
 scale = Vector2(1.15, 1.15)
 texture = ExtResource("1_qp3at")
 hframes = 14
@@ -96,10 +95,10 @@ vframes = 7
 frame = 71
 
 [node name="PlatformPackTilesheet" type="Sprite2D" parent="Center" unique_id=1078934043]
+modulate = Color(1.15, 1.15, 1.18, 1)
 position = Vector2(1.4312706, 0.0905838)
 rotation = 1.6115934
 scale = Vector2(0.6, 0.6)
-modulate = Color(1.15, 1.15, 1.18, 1)
 texture = ExtResource("1_qp3at")
 hframes = 14
 vframes = 7
