@@ -15,7 +15,7 @@ const LAYOUT := {
 
 const STARS := {
 	"StarA": Vector2(0.13, 0.17),
-	"StarB": Vector2(0.55, 0.1),
+	"StarB": Vector2(0.80, 0.40),
 	"StarC": Vector2(0.87, 0.23),
 }
 
@@ -55,6 +55,8 @@ func _ready() -> void:
 	_layout()
 	get_viewport().size_changed.connect(_layout)
 	_setup_button_effects()
+	if has_node("MusicPlayer") and not $MusicPlayer.playing:
+		$MusicPlayer.play(0)
 
 
 func _setup_button_effects() -> void:
@@ -93,9 +95,7 @@ func _layout() -> void:
 	$UI.size = vp
 	_drifters.clear()
 	_twinklers.clear()
-	var bgl = get_node_or_null("/root/BgLayout")
-	if bgl and bgl.has_method("apply"):
-		bgl.apply($Background, LAYOUT)
+	BgLayout.apply($Background, LAYOUT)
 
 	for key in DRIFT:
 		var layer_name := String(key)
@@ -172,3 +172,8 @@ func _on_btn_story_pressed() -> void:
 
 func _on_btn_exit_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_music_player_finished() -> void:
+	if has_node("MusicPlayer"):
+		$MusicPlayer.play(0)

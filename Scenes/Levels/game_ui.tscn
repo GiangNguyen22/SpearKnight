@@ -728,6 +728,64 @@ texture = ExtResource("14_element")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="btnSkill" type="Button" parent="GameUI/BottomControls"]
+custom_minimum_size = Vector2(84, 84)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -122.0
+offset_top = -358.0
+offset_right = -38.0
+offset_bottom = -274.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 0.9, 0.45, 1)
+theme_override_colors/font_outline_color = Color(0.08, 0.03, 0.12, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_skill")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_skill")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_skill_pressed")
+text = "SKILL"
+
+[node name="SkillLabel" type="Label" parent="GameUI/BottomControls/btnSkill"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = 2.0
+offset_right = 44.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.85, 0.4, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 9
+text = "Xoay Thương"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CooldownOverlay" type="ColorRect" parent="GameUI/BottomControls/btnSkill"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.55)
+
 [node name="AlertLabel" type="Label" parent="GameUI"]
 unique_name_in_owner = true
 visible = false
@@ -759,6 +817,9 @@ visible = false
 visible = false
 
 [connection signal="pressed" from="GameUI/TopBar/TopRightWidget/BtnShop" to="." method="_on_btn_shop_pressed"]
+[connection signal="pressed" from="GameUI/TopBar/TopRightWidget/BtnMusic" to="." method="_on_btn_music_pressed"]
+[connection signal="pressed" from="GameUI/TopBar/TopRightWidget/BtnSound" to="." method="_on_btn_sound_pressed"]
+[connection signal="pressed" from="GameUI/TopBar/TopRightWidget/BtnPause" to="." method="_on_btn_pause_pressed"]
 [connection signal="button_down" from="GameUI/BottomControls/btnLeft" to="." method="_on_btn_left_pressed"]
 [connection signal="button_up" from="GameUI/BottomControls/btnLeft" to="." method="_on_btn_left_released"]
 [connection signal="button_down" from="GameUI/BottomControls/btnRight" to="." method="_on_btn_right_pressed"]
@@ -770,3 +831,4 @@ visible = false
 [connection signal="button_down" from="GameUI/BottomControls/btnShoot" to="." method="_on_btn_shoot_button_down"]
 [connection signal="button_up" from="GameUI/BottomControls/btnShoot" to="." method="_on_btn_shoot_button_up"]
 [connection signal="pressed" from="GameUI/BottomControls/btnElement" to="." method="_on_btn_element_pressed"]
+[connection signal="pressed" from="GameUI/BottomControls/btnSkill" to="." method="_on_btn_special_pressed"]

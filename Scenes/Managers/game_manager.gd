@@ -26,7 +26,7 @@ var _timing_active : bool = false
 var sfx_on = true
 var music_on = true
 var master_volume: float = 1.0
-var music_volume: float = 0.8
+var music_volume: float = 1.0
 var sfx_volume: float = 1.0
 
 var player :Player = null
@@ -40,6 +40,7 @@ var is_processing_death: bool = false
 
 func _ready() -> void:
 	peek_save_metadata()
+	load_option()
 	var icon_tex = load("res://Assets/Splash/splash.png")
 	if icon_tex and icon_tex is Texture2D:
 		DisplayServer.set_icon(icon_tex.get_image())
@@ -225,10 +226,19 @@ func add_hp(val=1):
 
 func set_bus_volume(bus_name: String, linear_val: float) -> void:
 	var bus_idx = AudioServer.get_bus_index(bus_name)
+	if bus_idx == -1:
+		for i in range(AudioServer.bus_count):
+			if AudioServer.get_bus_name(i).to_lower() == bus_name.to_lower():
+				bus_idx = i
+				break
 	if bus_idx != -1:
-		var db_val = linear_to_db(clampf(linear_val, 0.0001, 1.0))
-		AudioServer.set_bus_volume_db(bus_idx, db_val)
-		AudioServer.set_bus_mute(bus_idx, linear_val <= 0.001)
+		var is_mute := (linear_val <= 0.001)
+		AudioServer.set_bus_mute(bus_idx, is_mute)
+		if not is_mute:
+			var db_val = linear_to_db(clampf(linear_val, 0.0001, 1.0))
+			AudioServer.set_bus_volume_db(bus_idx, db_val)
+		else:
+			AudioServer.set_bus_volume_db(bus_idx, -80.0)
 
 func update_option():
 	set_bus_volume("Master", master_volume)
@@ -276,14 +286,15 @@ func load_option():
 	if FileAccess.file_exists("user://option.json"):
 		var file = FileAccess.open("user://option.json", FileAccess.READ)
 		var text = file.get_pascal_string()
-		var data = JSON.parse_string(text)        		
+		var data = JSON.parse_string(text)
 		file.close()
-		music_on = data.get("music", true)
-		sfx_on = data.get("sound", true)
-		master_volume = data.get("master_volume", 1.0)
-		music_volume = data.get("music_volume", 0.8)
-		sfx_volume = data.get("sfx_volume", 1.0)
-		update_option()
+		if data is Dictionary:
+			music_on = data.get("music", true)
+			sfx_on = data.get("sound", true)
+			master_volume = data.get("master_volume", 1.0)
+			music_volume = data.get("music_volume", 1.0)
+			sfx_volume = data.get("sfx_volume", 1.0)
+	update_option()
 				
 func peek_save_metadata() -> void:
 	if FileAccess.file_exists(save_path):

@@ -18,8 +18,8 @@ var selected_class: String = "knight"
 
 var class_descriptions: Dictionary = {
 	"knight": "[b][color=#ffd700]⚔️ HIỆP SĨ THIẾT GIÁP (KNIGHT)[/color][/b]\n[color=#e0e0e0]• Sinh Mệnh: 100 HP  |  Tốc Độ: 300 px/s[/color]\n[color=#87cefa]• Vũ khí: Chiến Thương Thần Thánh (Combo Cận Chiến 3 Nhịp: Đâm - Chém Hất - Bổ Đoạt Mệnh)[/color]\n[color=#cccccc]• Kỹ năng: Bổ Không Trung (Plunge Attack) chấn động AoE 140px, Lướt bóng ma (Dash) và Nảy Tường (Wall Jump).[/color]",
-	"mage": "[b][color=#ba55d3]🔮 PHÙ THỦY MA PHÁP (SORCERESS)[/color][/b]\n[color=#e0e0e0]• Sinh Mệnh: 80 HP  |  Tốc Độ: 280 px/s[/color]\n[color=#ff7f50]• Năng lực: Chưởng Pháp Nguyên Tố Thuần Khiết (Hỏa Cầu AoE 88px, Băng Tiễn Xuyên Phá, Quang Phép)[/color]\n[color=#cccccc]• Kỹ năng: Tốc Biến Hư Không (Blink né tránh), Mưa Phép Tỏa Cánh Quạt trên không và Bộc Phá Cự Ly Gần.[/color]",
-	"archer": "[b][color=#3cb371]🏹 CUNG THỦ TRINH SÁT (RANGER)[/color][/b]\n[color=#e0e0e0]• Sinh Mệnh: 90 HP  |  Tốc Độ: 345 px/s (+15% Thần Tốc)[/color]\n[color=#adff2f]• Vũ khí: Cung Tên Thần Tốc (Tên Bắn Xuyên Kẻ Địch, Tầm Bắn Xa & Bắn Găm Cận Chiến)[/color]\n[color=#cccccc]• Kỹ năng: Tốc độ di chuyển vượt trội, linh hoạt né đòn và thả diều tiêu diệt bầy quái vật từ xa.[/color]"
+	"mage": "[b][color=#ba55d3]🔮 PHÙ THỦY MA PHÁP (SORCERESS)[/color][/b]\n[color=#e0e0e0]• Sinh Mệnh: 80 HP  |  Tốc Độ: 280 px/s[/color]\n[color=#ff7f50]• Năng lực: Chưởng Pháp Nguyên Tố (Hỏa Cầu, Băng Tiễn, Quang Phép)[/color]\n[color=#cccccc]• Kỹ năng: Tốc Biến Hư Không (Blink), Tuyệt Kỹ Phóng Cầu Ma Thuật Khổng Lồ càn quét bầy quái và nổ AoE 160px cực đại.[/color]",
+	"archer": "[b][color=#3cb371]🏹 CUNG THỦ TRINH SÁT (RANGER)[/color][/b]\n[color=#e0e0e0]• Sinh Mệnh: 90 HP  |  Tốc Độ: 345 px/s (+15% Thần Tốc)[/color]\n[color=#adff2f]• Vũ khí: Cung Tên Thần Tốc (Tên Bắn Xuyên Kẻ Địch, Hoạt Ảnh Kéo Cung & Buông Tên Tinh Xảo)[/color]\n[color=#cccccc]• Kỹ năng: Tốc độ di chuyển thần tốc, Tuyệt Kỹ Mưa Tên 3 Hướng tỏa quạt xé toạc phòng tuyến địch.[/color]"
 }
 
 

@@ -37,10 +37,21 @@
 |------|-----------|
 | **A / D** hoặc **Mũi tên Trái / Phải** | Di chuyển Trái / Phải |
 | **Space** | Nhảy / Nhảy đôi (Double Jump) |
-| **Shift** | Lướt nhanh (Dash) |
-| **J / Left Click** | Tấn công / Bắn chưởng |
-| **K** | Đổi thuộc tính nguyên tố |
+| **Shift / C** | Lướt nhanh (Dash) |
+| **X** | Tấn công / Bắn chưởng |
+| **Q** | Đổi thuộc tính nguyên tố |
+| **Z** | Kích hoạt kỹ năng đặc trưng của class |
 | **Esc** | Tạm dừng (Pause Menu) |
+
+---
+
+## ⚔️ Bộ Kỹ Năng Theo Nhân Vật
+
+- **Knight**: Combo thương cận chiến và **Spear Cyclone** — xoay thương gây sát thương quanh người chơi.
+- **Sorceress**: Niệm chú mặt đất/trên không và **Arcane Nova** — bùng nổ ma thuật diện rộng theo nguyên tố đang chọn.
+- **Ranger**: Kéo–nhả cung và **Triple Volley** — bắn 3 mũi tên xòe theo hình quạt.
+
+Phím `Z` và nút `SKILL` trên Touch UI kích hoạt kỹ năng đặc trưng; mỗi kỹ năng có hồi chiêu riêng.
 
 ---
 

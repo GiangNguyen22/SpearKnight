@@ -876,33 +876,54 @@ _data = {
 [node name="body" type="Bone2D" parent="Skeleton2D" unique_id=2035177549]
 position = Vector2(2, -38)
 rest = Transform2D(1, 0, 0, 1, 2, -38)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
 
 [node name="head" type="Bone2D" parent="Skeleton2D/body" unique_id=2110505577]
 position = Vector2(-2, -32)
 scale = Vector2(0.99999964, 0.99999964)
 rest = Transform2D(1, 0, 0, 1, -2, -32)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
 
 [node name="head2" type="Bone2D" parent="Skeleton2D/body/head" unique_id=2126738367]
 position = Vector2(0, -52)
 rest = Transform2D(1, 0, 0, 1, 0, -52)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
 
 [node name="LArm" type="Bone2D" parent="Skeleton2D/body" unique_id=2120276615]
 position = Vector2(11, -16)
 scale = Vector2(0.99999934, 0.99999934)
 rest = Transform2D(1, 0, 0, 1, 11, -16)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
 
 [node name="RArm" type="Bone2D" parent="Skeleton2D/body" unique_id=208622858]
 position = Vector2(-13, -18)
 rest = Transform2D(1, 0, 0, 1, -13, -18)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
 
 [node name="RLeg" type="Bone2D" parent="Skeleton2D/body" unique_id=1668380208]
 position = Vector2(4, 14)
 scale = Vector2(0.99999964, 0.99999964)
 rest = Transform2D(1, 0, 0, 1, 4, 14)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
 
 [node name="LLeg" type="Bone2D" parent="Skeleton2D/body" unique_id=694126583]
 position = Vector2(-14, 15)
 rest = Transform2D(1, 0, 0, 1, -14, 15)
+auto_calculate_length_and_angle = false
+length = 16.0
+bone_angle = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=39790286]
 libraries/ = SubResource("AnimationLibrary_lascq")

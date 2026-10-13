@@ -32,9 +32,7 @@ func _ready() -> void:
 
 func _layout() -> void:
 	$UI.size = get_viewport_rect().size
-	var bgl = get_node_or_null("/root/BgLayout")
-	if bgl and bgl.has_method("apply"):
-		bgl.apply($Background, LAYOUT)
+	BgLayout.apply($Background, LAYOUT)
 
 func _on_slider_master_changed(val: float) -> void:
 	var gm = get_node_or_null("/root/GameManager")

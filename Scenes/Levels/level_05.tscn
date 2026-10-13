@@ -287,6 +287,7 @@ metadata/_edit_lock_ = true
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=724032201]
 stream = ExtResource("30_bslim")
+volume_db = 3.0
 bus = &"music"
 
 [node name="TorchRed1" type="PointLight2D" parent="." unique_id=69614159 instance=ExtResource("31_8tngq")]

@@ -7,11 +7,11 @@ extends CanvasLayer
 @onready var max_hp_label: Label = %MaxHPLabel if has_node("%MaxHPLabel") else null
 @onready var life_rect: TextureRect = %LifeRect if has_node("%LifeRect") else null
 
-@onready var btn_sound: Button = %BtnSound if has_node("%BtnSound") else null
-@onready var btn_music: Button = %BtnMusic if has_node("%BtnMusic") else null
-@onready var btn_pause: Button = %BtnPause if has_node("%BtnPause") else null
-@onready var sound_icon: TextureRect = %SoundIcon if has_node("%SoundIcon") else null
-@onready var music_icon: TextureRect = %MusicIcon if has_node("%MusicIcon") else null
+@onready var btn_sound: Button = get_node_or_null("GameUI/TopBar/TopRightWidget/BtnSound") if has_node("GameUI/TopBar/TopRightWidget/BtnSound") else (%BtnSound if has_node("%BtnSound") else null)
+@onready var btn_music: Button = get_node_or_null("GameUI/TopBar/TopRightWidget/BtnMusic") if has_node("GameUI/TopBar/TopRightWidget/BtnMusic") else (%BtnMusic if has_node("%BtnMusic") else null)
+@onready var btn_pause: Button = get_node_or_null("GameUI/TopBar/TopRightWidget/BtnPause") if has_node("GameUI/TopBar/TopRightWidget/BtnPause") else (%BtnPause if has_node("%BtnPause") else null)
+@onready var sound_icon: TextureRect = get_node_or_null("GameUI/TopBar/TopRightWidget/BtnSound/SoundIcon") if has_node("GameUI/TopBar/TopRightWidget/BtnSound/SoundIcon") else (%SoundIcon if has_node("%SoundIcon") else null)
+@onready var music_icon: TextureRect = get_node_or_null("GameUI/TopBar/TopRightWidget/BtnMusic/MusicIcon") if has_node("GameUI/TopBar/TopRightWidget/BtnMusic/MusicIcon") else (%MusicIcon if has_node("%MusicIcon") else null)
 
 @onready var boss_panel: Control = %BossBarPanel if has_node("%BossBarPanel") else null
 @onready var boss_bar: ProgressBar = %BossProgressBar if has_node("%BossProgressBar") else null
@@ -20,7 +20,12 @@ extends CanvasLayer
 @onready var shop_menu: Control = $ShopMenu if has_node("ShopMenu") else null
 @onready var pause_menu: Control = $PauseMenu if has_node("PauseMenu") else null
 
+@onready var btn_skill: Button = get_node_or_null("GameUI/BottomControls/btnSkill")
+@onready var skill_label: Label = %SkillLabel if has_node("%SkillLabel") else null
+@onready var cooldown_overlay: ColorRect = %CooldownOverlay if has_node("%CooldownOverlay") else null
+
 var current_boss: Node2D = null
+var _last_cid: String = ""
 
 # Preloaded audio icon textures for fast switching
 var sound_on_tex: Texture2D
@@ -35,14 +40,15 @@ func _ready() -> void:
 	music_on_tex = load("res://Assets/UI/icon_music_on.png")
 	music_off_tex = load("res://Assets/UI/icon_music_off.png")
 	
-	if btn_pause:
+	if btn_pause and not btn_pause.pressed.is_connected(_on_btn_pause_pressed):
 		btn_pause.pressed.connect(_on_btn_pause_pressed)
-	if btn_sound:
+	if btn_sound and not btn_sound.pressed.is_connected(_on_btn_sound_pressed):
 		btn_sound.pressed.connect(_on_btn_sound_pressed)
-	if btn_music:
+	if btn_music and not btn_music.pressed.is_connected(_on_btn_music_pressed):
 		btn_music.pressed.connect(_on_btn_music_pressed)
 		
 	update_audio_icons()
+	update_skill_button_for_character()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -79,6 +85,14 @@ func _process(_delta: float) -> void:
 		update_audio_icons()
 	
 	check_boss_status()
+	update_skill_cooldown()
+	
+	# Cập nhật skill button khi nhân vật thay đổi
+	var gm2 = get_node_or_null("/root/GameManager")
+	var cid: String = gm2.selected_character_id if gm2 and "selected_character_id" in gm2 else "knight"
+	if cid != _last_cid:
+		_last_cid = cid
+		update_skill_button_for_character()
 
 
 func update_audio_icons() -> void:
@@ -86,8 +100,10 @@ func update_audio_icons() -> void:
 	if gm:
 		if sound_icon:
 			sound_icon.texture = sound_on_tex if gm.sfx_on else sound_off_tex
+			sound_icon.modulate = Color(1, 1, 1, 1) if gm.sfx_on else Color(0.7, 0.7, 0.7, 0.5)
 		if music_icon:
 			music_icon.texture = music_on_tex if gm.music_on else music_off_tex
+			music_icon.modulate = Color(1, 1, 1, 1) if gm.music_on else Color(0.7, 0.7, 0.7, 0.5)
 		
 		# Also update legacy child nodes if they exist
 		var sound_on = get_node_or_null("GameUI/TopBar/btnSound/on")
@@ -203,9 +219,129 @@ func _on_btn_element_pressed() -> void:
 	Input.action_press("SwitchElement")
 	Input.action_release("SwitchElement")
 
+func _on_btn_special_pressed() -> void:
+	Input.action_press("Special")
+	Input.action_release("Special")
+
 func _on_btn_interact_pressed() -> void:
 	Input.action_press("Interact")
 	Input.action_release("Interact")
 
 func _on_btn_shop_pressed() -> void:
 	toggle_shop()
+
+
+# --------- SKILL BUTTON PER-CHARACTER ---------- #
+
+func update_skill_button_for_character() -> void:
+	var gm = get_node_or_null("/root/GameManager")
+	var cid: String = gm.selected_character_id if gm and "selected_character_id" in gm else "knight"
+	_last_cid = cid
+	
+	if not btn_skill:
+		return
+	
+	# Cấu hình skill riêng biệt cho mỗi nhân vật
+	var skill_name: String = ""
+	var skill_text: String = ""
+	var border_color: Color = Color(0.85, 0.45, 1.0, 0.95)
+	var bg_color: Color = Color(0.12, 0.04, 0.18, 0.88)
+	var bg_pressed: Color = Color(0.75, 0.35, 0.95, 0.95)
+	var font_color: Color = Color(1, 0.9, 0.45, 1)
+	
+	match cid:
+		"knight":
+			skill_text = "⚔️"
+			skill_name = "Xoay Thương"
+			border_color = Color(1.0, 0.75, 0.15, 0.95)  # Vàng hoàng kim
+			bg_color = Color(0.16, 0.10, 0.02, 0.88)
+			bg_pressed = Color(0.95, 0.68, 0.1, 0.95)
+			font_color = Color(1.0, 0.88, 0.3, 1.0)
+		"mage":
+			skill_text = "🔮"
+			skill_name = "Cầu Ma Thuật"
+			border_color = Color(0.6, 0.3, 1.0, 0.95)  # Tím arcane
+			bg_color = Color(0.08, 0.02, 0.18, 0.88)
+			bg_pressed = Color(0.65, 0.25, 0.95, 0.95)
+			font_color = Color(0.85, 0.65, 1.0, 1.0)
+		"archer":
+			skill_text = "🏹"
+			skill_name = "Mưa Tên"
+			border_color = Color(0.2, 0.9, 0.5, 0.95)  # Xanh lá rừng
+			bg_color = Color(0.02, 0.12, 0.06, 0.88)
+			bg_pressed = Color(0.15, 0.82, 0.45, 0.95)
+			font_color = Color(0.6, 1.0, 0.7, 1.0)
+	
+	# Cập nhật text chính trên nút
+	btn_skill.text = skill_text
+	btn_skill.add_theme_color_override("font_color", font_color)
+	
+	# Cập nhật label phụ hiển thị tên skill
+	if skill_label:
+		skill_label.text = skill_name
+		skill_label.add_theme_color_override("font_color", font_color)
+	
+	# Cập nhật style (tạo StyleBoxFlat mới cho nút)
+	var style_normal := StyleBoxFlat.new()
+	style_normal.bg_color = bg_color
+	style_normal.border_color = border_color
+	style_normal.set_border_width_all(3)
+	style_normal.set_corner_radius_all(40)
+	btn_skill.add_theme_stylebox_override("normal", style_normal)
+	btn_skill.add_theme_stylebox_override("hover", style_normal)
+	
+	var style_pressed := StyleBoxFlat.new()
+	style_pressed.bg_color = bg_pressed
+	style_pressed.border_color = Color(1.0, 1.0, 1.0, 1.0)
+	style_pressed.set_border_width_all(3)
+	style_pressed.set_corner_radius_all(40)
+	btn_skill.add_theme_stylebox_override("pressed", style_pressed)
+
+
+func update_skill_cooldown() -> void:
+	if not btn_skill:
+		return
+	
+	# Tìm player để lấy thời gian cooldown
+	var player: Node = null
+	if is_inside_tree() and get_tree():
+		var players = get_tree().get_nodes_in_group("Player")
+		if players.size() > 0:
+			player = players[0]
+	
+	var on_cooldown: bool = false
+	var cooldown_remaining: float = 0.0
+	var cooldown_max: float = 1.0
+	
+	if player and "special_cooldown_timer" in player:
+		cooldown_remaining = player.special_cooldown_timer
+		on_cooldown = cooldown_remaining > 0.0
+		
+		# Lấy cooldown tối đa theo class
+		var gm = get_node_or_null("/root/GameManager")
+		var cid: String = gm.selected_character_id if gm and "selected_character_id" in gm else "knight"
+		match cid:
+			"knight": cooldown_max = 2.5
+			"mage": cooldown_max = 3.0
+			"archer": cooldown_max = 2.2
+	
+	# Hiển thị overlay cooldown
+	if cooldown_overlay:
+		if on_cooldown:
+			cooldown_overlay.visible = true
+			# Thay đổi độ mờ theo thời gian cooldown còn lại
+			var ratio: float = clampf(cooldown_remaining / cooldown_max, 0.0, 1.0)
+			cooldown_overlay.color = Color(0, 0, 0, 0.55 * ratio)
+			
+			# Hiển thị số giây còn lại trên nút
+			btn_skill.text = "%.1f" % cooldown_remaining
+		else:
+			cooldown_overlay.visible = false
+			# Khôi phục text gốc theo nhân vật
+			var gm2 = get_node_or_null("/root/GameManager")
+			var cid2: String = gm2.selected_character_id if gm2 and "selected_character_id" in gm2 else "knight"
+			match cid2:
+				"knight": btn_skill.text = "⚔️"
+				"mage": btn_skill.text = "✦"
+				"archer": btn_skill.text = "🏹"
+				_: btn_skill.text = "SKILL"

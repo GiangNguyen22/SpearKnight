@@ -6,6 +6,8 @@ extends RigidBody2D
 @export var element_type: int = 0 # 0 = Arcane, 1 = Fire, 2 = Ice
 @export var pierce_count: int = 0
 
+@export var is_giant_orb: bool = false
+
 @onready var sprite: Sprite2D = get_node_or_null("Sprite2D")
 @onready var trail_particles: CPUParticles2D = get_node_or_null("TrailParticles")
 
@@ -14,11 +16,47 @@ var is_exploded: bool = false
 var base_scale: Vector2 = Vector2(0.38, 0.38)
 
 func _ready() -> void:
+	if not is_giant_orb:
+		update_element_appearance()
+
+func configure_giant_orb(elem: int = -1) -> void:
+	is_giant_orb = true
+	if elem >= 0:
+		element_type = elem
 	update_element_appearance()
+	
+	# Thông số của Quả Cầu Năng Lượng Khổng Lồ
+	damage = 95.0
+	aoe_radius = 160.0
+	pierce_count = 2 # Xuyên 2 mục tiêu đầu trước khi nổ bùng diệt sạch
+	gravity_scale = 0.0 # Bay thẳng tắp uy lực
+	base_scale = Vector2(1.18, 1.18)
+	
+	if sprite:
+		sprite.scale = base_scale
+	
+	if has_node("CollisionShape2D"):
+		var col_shape = get_node("CollisionShape2D")
+		var new_shape := CircleShape2D.new()
+		new_shape.radius = 28.0
+		col_shape.shape = new_shape
+		
+	if trail_particles:
+		trail_particles.amount = 55
+		trail_particles.scale_amount_min = 6.0
+		trail_particles.scale_amount_max = 14.0
+		trail_particles.lifetime = 0.45
 
 func _process(delta: float) -> void:
 	if not sprite or is_exploded: return
 	
+	if is_giant_orb:
+		# Hiệu ứng quả cầu khổng lồ cuộn xoáy năng lượng và đập phập phồng
+		var pulse = sin(Time.get_ticks_msec() * 0.016) * 0.16
+		sprite.rotation += 9.0 * delta
+		sprite.scale = base_scale * (1.0 + pulse)
+		return
+		
 	# Hiệu ứng lõi năng lượng phập phồng (Energy Pulsing)
 	var pulse = sin(Time.get_ticks_msec() * 0.02) * 0.12
 	match element_type:
@@ -147,8 +185,23 @@ func explode_aoe() -> void:
 			burst_color = Color(0.7, 2.2, 3.0, 1.0)
 			shake_power = 4.5
 			
+	if is_giant_orb:
+		shake_power = 12.0
+		# Âm thanh vụ nổ sấm sét cực lớn
+		if is_inside_tree() and get_parent():
+			var exp_sfx := AudioStreamPlayer2D.new()
+			var stream_res = load("res://Assets/Sound/FX/explosion.wav")
+			if stream_res:
+				exp_sfx.stream = stream_res
+				exp_sfx.bus = "sfx"
+				exp_sfx.volume_db = 6.0
+				exp_sfx.global_position = global_position
+				get_parent().add_child(exp_sfx)
+				exp_sfx.play()
+				exp_sfx.finished.connect(exp_sfx.queue_free)
+	
 	if gm and gm.has_method("shake_camera"):
-		gm.shake_camera(shake_power, 0.18)
+		gm.shake_camera(shake_power, 0.25 if is_giant_orb else 0.18)
 		
 	# Sóng xung kích phát quang bùng nổ (Shockwave ring)
 	spawn_impact_shockwave(global_position, burst_color, aoe_radius)
@@ -208,14 +261,14 @@ func spawn_burst_vfx(burst_pos: Vector2, color: Color) -> void:
 	p.one_shot = true
 	p.explosiveness = 0.95
 	p.local_coords = false
-	p.amount = 28 if element_type == 1 else 20
-	p.lifetime = 0.35
+	p.amount = 60 if is_giant_orb else (28 if element_type == 1 else 20)
+	p.lifetime = 0.45 if is_giant_orb else 0.35
 	p.spread = 180.0
 	p.gravity = Vector2(0, 60.0) if element_type != 1 else Vector2(0, -60.0)
-	p.initial_velocity_min = 70.0
-	p.initial_velocity_max = 160.0
-	p.scale_amount_min = 2.5
-	p.scale_amount_max = 6.0
+	p.initial_velocity_min = 110.0 if is_giant_orb else 70.0
+	p.initial_velocity_max = 240.0 if is_giant_orb else 160.0
+	p.scale_amount_min = 5.0 if is_giant_orb else 2.5
+	p.scale_amount_max = 12.0 if is_giant_orb else 6.0
 	p.color = color
 	p.global_position = burst_pos
 	

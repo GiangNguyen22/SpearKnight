@@ -327,10 +327,12 @@ texture = ExtResource("vfx_spark")
 [node name="SwingSfx" type="AudioStreamPlayer2D" parent="student" unique_id=987123460]
 stream = ExtResource("sfx_swing")
 volume_db = 2.0
+bus = &"sfx"
 
 [node name="HitSfx" type="AudioStreamPlayer2D" parent="student" unique_id=987123461]
 stream = ExtResource("sfx_hit")
 volume_db = 4.0
+bus = &"sfx"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1467812523]
 script = ExtResource("cam_script")
