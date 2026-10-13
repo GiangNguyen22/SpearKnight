@@ -36,7 +36,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_laser_floor"]
 size = Vector2(800, 24)
 
-[node name="BossAbyss" instance=ExtResource("1_enemy")]
+[node name="BossAbyss" groups=["Enemy", "Boss"] instance=ExtResource("1_enemy")]
 script = ExtResource("2_abyss_script")
 max_hp = 800.0
 hp = 800.0

@@ -47,6 +47,7 @@ collision_mask = 2
 script = ExtResource("3_ovhm1")
 next_scene = ExtResource("4_nkdd7")
 required_keys = 4
+require_boss_defeat = true
 
 [node name="Level" type="Node2D" parent="." unique_id=1752500785]
 
@@ -122,14 +123,6 @@ collision_mask = 0
 sync_to_physics = false
 script = ExtResource("13_3lo72")
 
-[node name="SpikePendulum1" type="Node2D" parent="Level" unique_id=1894763376 instance=ExtResource("14_6oq4i")]
-position = Vector2(830, 210)
-
-[node name="Sawblade2" type="StaticBody2D" parent="Level" unique_id=1577569780 groups=["Traps"] instance=ExtResource("9_h0g4a")]
-position = Vector2(1340, 420)
-collision_layer = 9
-collision_mask = 2
-
 [node name="TrapLaser2" type="Area2D" parent="Level" unique_id=659451215 groups=["Traps"] instance=ExtResource("10_iv3sq")]
 position = Vector2(1460, 340)
 rotation = 1.5708
@@ -151,9 +144,6 @@ collision_mask = 2
 script = ExtResource("11_dx6ub")
 toggle_interval = 1.0
 damage = 30.0
-
-[node name="SpikePendulum2" type="Node2D" parent="Level" unique_id=1603668152 instance=ExtResource("14_6oq4i")]
-position = Vector2(1728, 200)
 
 [node name="FallingPlat5" type="AnimatableBody2D" parent="Level" unique_id=1606551179 instance=ExtResource("12_vntcs")]
 position = Vector2(1860, 410)
@@ -255,8 +245,9 @@ position = Vector2(1500, 400)
 collision_layer = 4
 collision_mask = 13
 script = ExtResource("23_72mq3")
+rank = 1
 
-[node name="BossAbyss" type="CharacterBody2D" parent="Enemies" unique_id=565318899 groups=["Enemy"] instance=ExtResource("25_gvset")]
+[node name="BossAbyss" type="CharacterBody2D" parent="Enemies" unique_id=565318899 groups=["Enemy", "Boss"] instance=ExtResource("25_gvset")]
 position = Vector2(2300, 448)
 collision_layer = 4
 collision_mask = 13
@@ -325,18 +316,6 @@ energy = 1.8
 texture = ExtResource("32_j0yrs")
 script = ExtResource("33_ju0pp")
 
-[connection signal="body_entered" from="LevelFinishDoor" to="LevelFinishDoor" method="_on_body_entered"]
 [connection signal="hit_enemy" from="Player" to="." method="_on_player_hit_enemy"]
 [connection signal="hit_trap" from="Player" to="." method="_on_player_hit_trap"]
-[connection signal="body_entered" from="Coins/Coin1" to="Coins/Coin1" method="_on_body_entered"]
-[connection signal="body_entered" from="Coins/Coin2" to="Coins/Coin2" method="_on_body_entered"]
-[connection signal="body_entered" from="Coins/Coin3" to="Coins/Coin3" method="_on_body_entered"]
-[connection signal="body_entered" from="Coins/Coin4" to="Coins/Coin4" method="_on_body_entered"]
-[connection signal="body_entered" from="Coins/Coin5" to="Coins/Coin5" method="_on_body_entered"]
-[connection signal="body_entered" from="Coins/Coin6" to="Coins/Coin6" method="_on_body_entered"]
-[connection signal="body_entered" from="Coins/Coin7" to="Coins/Coin7" method="_on_body_entered"]
-[connection signal="body_entered" from="Coins/Coin8" to="Coins/Coin8" method="_on_body_entered"]
-[connection signal="body_entered" from="Coins/Coin9" to="Coins/Coin9" method="_on_body_entered"]
-[connection signal="body_entered" from="Coins/HealPotion1" to="Coins/HealPotion1" method="_on_body_entered"]
-[connection signal="body_entered" from="Coins/HealPotion2" to="Coins/HealPotion2" method="_on_body_entered"]
 [connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]

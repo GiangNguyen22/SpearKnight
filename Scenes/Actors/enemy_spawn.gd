@@ -28,6 +28,8 @@ func respawn():
 		obj.direction = [-1,1].pick_random()
 		obj.velocity.y = -200
 		self.add_child(obj)
+		if randf() < 0.25 and obj.has_method("setup_smart_ai"):
+			obj.setup_smart_ai([Enemy.SmartAIType.BOMBER, Enemy.SmartAIType.ROCK_THROWER].pick_random())
 		trespawn = respawn_time.pick_random()
 		
 func _on_timer_timeout() -> void:

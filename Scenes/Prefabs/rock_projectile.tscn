@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://c3nmhpwy7i3vs"]
+
+[ext_resource type="Script" path="res://Scenes/Prefabs/rock_projectile.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://jaegp53ccc7w" path="res://Assets/Spritesheet/platformPack_tilesheet.png" id="2_tilesheet"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rock"]
+radius = 12.0
+
+[node name="RockProjectile" type="Area2D"]
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rock")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1.1, 0.95, 0.85, 1)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("2_tilesheet")
+hframes = 14
+vframes = 7
+frame = 64
+
+[node name="Trail" type="CPUParticles2D" parent="."]
+amount = 10
+lifetime = 0.22
+local_coords = false
+gravity = Vector2(0, 40)
+emission_shape = 1
+emission_sphere_radius = 4.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color = Color(0.7, 0.55, 0.4, 0.75)

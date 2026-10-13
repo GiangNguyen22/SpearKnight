@@ -69,6 +69,8 @@ func open_pause_menu() -> void:
 	if options_panel: options_panel.visible = false
 	sync_sliders_with_gamemanager()
 	pause_toggled.emit(true)
+	if btn_resume:
+		btn_resume.grab_focus.call_deferred()
 
 func close_pause_menu() -> void:
 	visible = false
@@ -90,10 +92,14 @@ func _on_btn_options_pressed() -> void:
 	if main_panel: main_panel.visible = false
 	if options_panel: options_panel.visible = true
 	sync_sliders_with_gamemanager()
+	if btn_back_options:
+		btn_back_options.grab_focus.call_deferred()
 
 func _on_btn_back_options_pressed() -> void:
 	if options_panel: options_panel.visible = false
 	if main_panel: main_panel.visible = true
+	if btn_options:
+		btn_options.grab_focus.call_deferred()
 
 func _on_btn_restart_pressed() -> void:
 	get_tree().paused = false

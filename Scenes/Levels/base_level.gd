@@ -20,6 +20,8 @@ func _ready() -> void:
 					coin_count += 1
 		gm.start_level_tracking(coin_count)
 	
+	setup_smart_enemies()
+	
 	if has_node("MusicPlayer"):
 		$MusicPlayer.play(0)
 		
@@ -69,3 +71,25 @@ func _on_player_hit_trap() -> void:
 func _on_music_player_finished() -> void:
 	if has_node("MusicPlayer"):
 		$MusicPlayer.play(0)
+
+func setup_smart_enemies() -> void:
+	await get_tree().process_frame
+	if not is_inside_tree() or not get_tree():
+		return
+		
+	var enemies: Array[Node] = []
+	for node in get_tree().get_nodes_in_group("Enemy"):
+		if node is Enemy and not node.is_in_group("Boss") and is_instance_valid(node):
+			enemies.append(node)
+			
+	if enemies.size() > 0:
+		enemies.shuffle()
+		var count: int = randi_range(1, mini(2, enemies.size()))
+		var smart_types = [Enemy.SmartAIType.BOMBER, Enemy.SmartAIType.ROCK_THROWER]
+		smart_types.shuffle()
+		
+		for i in range(count):
+			var en = enemies[i] as Enemy
+			if en and en.has_method("setup_smart_ai") and en.smart_type == Enemy.SmartAIType.NONE:
+				en.setup_smart_ai(smart_types[i % smart_types.size()])
+

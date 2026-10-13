@@ -43,8 +43,11 @@ func play_attack_animation() -> void:
 	var anim_sprite = get_node_or_null("Sprite/AnimateSprite") as AnimatedSprite2D
 	if anim_sprite and anim_sprite.sprite_frames and anim_sprite.sprite_frames.has_animation("attack"):
 		anim_sprite.play("attack")
-		anim_sprite.animation_finished.connect(func():
-			if is_instance_valid(anim_sprite) and alive:
-				if walk_animation_name != "":
-					anim_sprite.play(walk_animation_name)
-		, CONNECT_ONE_SHOT)
+		if not anim_sprite.animation_finished.is_connected(_on_attack_anim_finished):
+			anim_sprite.animation_finished.connect(_on_attack_anim_finished, CONNECT_ONE_SHOT)
+
+func _on_attack_anim_finished() -> void:
+	var anim_sprite = get_node_or_null("Sprite/AnimateSprite") as AnimatedSprite2D
+	if is_instance_valid(anim_sprite) and alive:
+		if walk_animation_name != "":
+			anim_sprite.play(walk_animation_name)

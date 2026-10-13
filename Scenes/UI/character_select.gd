@@ -17,10 +17,11 @@ extends Control
 var selected_class: String = "knight"
 
 var class_descriptions: Dictionary = {
-	"knight": "[b][color=#ffd700]⚔️ HIỆP SĨ THIẾT GIÁP (KNIGHT)[/color][/b]\n[color=#e0e0e0]• Sinh Mệnh: 100 HP  |  Tốc Độ: 300 px/s[/color]\n[color=#87cefa]• Vũ khí: Chiến Thương Thần Thánh (Combo Cận Chiến 3 Nhịp: Đâm - Chém Hất - Bổ Đoạt Mệnh)[/color]\n[color=#cccccc]• Kỹ năng: Bổ Không Trung (Plunge Attack) chấn động AoE 140px, Lướt bóng ma (Dash) và Nảy Tường (Wall Jump).[/color]",
-	"mage": "[b][color=#ba55d3]🔮 PHÙ THỦY MA PHÁP (SORCERESS)[/color][/b]\n[color=#e0e0e0]• Sinh Mệnh: 80 HP  |  Tốc Độ: 280 px/s[/color]\n[color=#ff7f50]• Năng lực: Chưởng Pháp Nguyên Tố (Hỏa Cầu, Băng Tiễn, Quang Phép)[/color]\n[color=#cccccc]• Kỹ năng: Tốc Biến Hư Không (Blink), Tuyệt Kỹ Phóng Cầu Ma Thuật Khổng Lồ càn quét bầy quái và nổ AoE 160px cực đại.[/color]",
-	"archer": "[b][color=#3cb371]🏹 CUNG THỦ TRINH SÁT (RANGER)[/color][/b]\n[color=#e0e0e0]• Sinh Mệnh: 90 HP  |  Tốc Độ: 345 px/s (+15% Thần Tốc)[/color]\n[color=#adff2f]• Vũ khí: Cung Tên Thần Tốc (Tên Bắn Xuyên Kẻ Địch, Hoạt Ảnh Kéo Cung & Buông Tên Tinh Xảo)[/color]\n[color=#cccccc]• Kỹ năng: Tốc độ di chuyển thần tốc, Tuyệt Kỹ Mưa Tên 3 Hướng tỏa quạt xé toạc phòng tuyến địch.[/color]"
+	"knight": "[b][color=#ffd700]⚔️ HIỆP SĨ THIẾT GIÁP (KNIGHT)[/color][/b]\n[color=#e0e0e0]• Sinh Mệnh: 100 HP  |  Tốc Độ: 300 px/s[/color]\n[color=#87cefa]• Vũ khí: Chiến Thương Thần Thánh (Võ Thuật Trường Thương Cận Chiến)[/color]\n[color=#ffd700]• Skill [Z]: Xoay Thương — Quét AoE xoáy 360° càn quét kẻ địch[/color]\n[color=#ffaa33]• Đổi Cách Đánh [Q]: 3 Thế Đánh Riêng Biệt (⚔️ Long Đột Đột Kích | 🔥 Bạo Viêm Nham Thạch | 🛡️ Trấn Thiên Khóa Chân)[/color]",
+	"mage": "[b][color=#ba55d3]🔮 PHÙ THỦY MA PHÁP (SORCERESS)[/color][/b]\n[color=#e0e0e0]• Sinh Mệnh: 80 HP  |  Tốc Độ: 280 px/s[/color]\n[color=#ff7f50]• Năng lực: Bí Thuật Ma Đạo Cổ Xưa (Chưởng Pháp Huyền Ảo)[/color]\n[color=#ba55d3]• Skill [Z]: Cầu Ma Thuật — Đại cầu ma pháp khổng lồ hủy diệt[/color]\n[color=#ffaa33]• Đổi Cách Đánh [Q]: 3 Pháp Phái Riêng Biệt (🌌 Tinh Vân Hút Quái | ⚡ Lôi Vân Sét Chuỗi | 🌑 Hư Không Bẫy Độc)[/color]",
+	"archer": "[b][color=#3cb371]🏹 CUNG THỦ TRINH SÁT (RANGER)[/color][/b]\n[color=#e0e0e0]• Sinh Mệnh: 90 HP  |  Tốc Độ: 345 px/s (+15% Thần Tốc)[/color]\n[color=#adff2f]• Vũ khí: Cung Tiễn Thợ Săn (Kéo Cung & Đạn Dược Chuyên Biệt)[/color]\n[color=#3cb371]• Skill [Z]: Mưa Tên — Bắn chùm 3 tên quạt thần tốc[/color]\n[color=#ffaa33]• Đổi Cách Đánh [Q]: 3 Tiễn Thuật Riêng Biệt (🍃 Phong Linh Tốc Xạ | 💥 Pháo Kích Bom Chùm | 🌿 Độc Xà Trói Chân)[/color]"
 }
+
 
 
 func _ensure_nodes() -> void:

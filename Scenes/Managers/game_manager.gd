@@ -29,7 +29,7 @@ var master_volume: float = 1.0
 var music_volume: float = 1.0
 var sfx_volume: float = 1.0
 
-var player :Player = null
+var player: CharacterBody2D = null
 var selected_character_id: String = "knight"
 var current_level : String = "res://Scenes/Levels/level_01.tscn"
 var unlocked_level : String = "res://Scenes/Levels/level_01.tscn"
